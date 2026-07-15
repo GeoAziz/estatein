@@ -1,0 +1,4062 @@
+{
+  "screenName": "Home Page - Desktop",
+  "nodeId": "46:304",
+  "textCount": 134,
+  "layoutSpecCount": 159,
+  "texts": [
+    {
+      "path": "Home Page - Desktop > Header > Banner > Text",
+      "text": "\u2728Discover Your Dream Property with Estatein",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "CENTER",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Home Page - Desktop > Header > Banner > Text Button",
+      "text": "Learn More",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "CENTER",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Header > Navigation Bar > Button > Text",
+      "text": "Contact Us",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Navigation Bar > Buttons Container > Button > Text",
+      "text": "Home",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Header > Navigation Bar > Buttons Container > Text Button",
+      "text": "About Us",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Header > Navigation Bar > Buttons Container > Text Button",
+      "text": "Properties",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Header > Navigation Bar > Buttons Container > Text Button",
+      "text": "Services",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Heading",
+      "text": "Featured Properties",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 48.0,
+      "lineHeight": 72.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Paragraph",
+      "text": "Explore our handpicked selection of featured properties. Each listing offers a glimpse into exceptional homes and investments available through Estatein. Click \"View Details\" for more information.",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Button > Text",
+      "text": "View All Properties",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Heading",
+      "text": "Seaside Serenity Villa",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Paragraph",
+      "text": "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "4-Bedroom",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "3-Bathroom",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "Villa",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Heading",
+      "text": "Price",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Paragraph",
+      "text": "$550,000",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Button > Text",
+      "text": "View Property Details",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Heading",
+      "text": "Metropolitan Haven",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Paragraph",
+      "text": "A chic and fully-furnished 2-bedroom apartment with panoramic city views... Read More",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "2-Bedroom",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "2-Bathroom",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "Villa",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Heading",
+      "text": "Price",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Paragraph",
+      "text": "$550,000",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Button > Text",
+      "text": "View Property Details",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Heading",
+      "text": "Rustic Retreat Cottage",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Paragraph",
+      "text": "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community... Read More",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "3-Bedroom",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "3-Bathroom",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "Villa",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Heading",
+      "text": "Price",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Paragraph",
+      "text": "$550,000",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Button > Text",
+      "text": "View Property Details",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "01 of 60",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Heading",
+      "text": "What Our Clients Say",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 48.0,
+      "lineHeight": 72.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Paragraph",
+      "text": "Read the success stories and heartfelt testimonials from our valued clients. Discover why they chose Estatein for their real estate needs.",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Button > Text",
+      "text": "View All Testimonials",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Items Container > Card > Text Container > Heading",
+      "text": "Exceptional Service!",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Items Container > Card > Text Container > Paragraph",
+      "text": "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Name",
+      "text": "Wade Warren",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Text",
+      "text": "USA, California",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Items Container > Card > Text Container > Heading",
+      "text": "Efficient and Reliable",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Items Container > Card > Text Container > Paragraph",
+      "text": "Estatein provided us with top-notch service. They helped us sell our property quickly and at a great price. We couldn't be happier with the results.\u2028",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Name",
+      "text": "Emelie Thomson",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Text",
+      "text": "USA, Florida",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Items Container > Card > Text Container > Heading",
+      "text": "Trusted Advisors",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Items Container > Card > Text Container > Paragraph",
+      "text": "The Estatein team guided us through the entire buying process. Their knowledge and commitment to our needs were impressive. Thank you for your support!",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Name",
+      "text": "John Mans",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Card > Container > Text Container > Text",
+      "text": "USA, Nevada",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "01 of 10",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Heading",
+      "text": "Frequently Asked Questions",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 48.0,
+      "lineHeight": 72.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Paragraph",
+      "text": "Find answers to common questions about Estatein's services, property listings, and the real estate process. We're here to provide clarity and assist you every step of the way.",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Button > Text",
+      "text": "View All FAQ\u2019s",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Items Container > Card > Heading",
+      "text": "How do I search for properties on Estatein?",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Items Container > Card > Paragraph",
+      "text": "Learn how to use our user-friendly search tools to find properties that match your criteria.",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Items Container > Card > Button > Text",
+      "text": "Read More",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 23.579998016357422,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Items Container > Card > Heading",
+      "text": "What documents do I need to sell my property through Estatein?",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Items Container > Card > Paragraph",
+      "text": "Find out about the necessary documentation for listing your property with us.",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Items Container > Card > Button > Text",
+      "text": "Read More",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 23.579998016357422,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Items Container > Card > Heading",
+      "text": "How can I contact an Estatein agent?\u2028",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 24.0,
+      "lineHeight": 36.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Items Container > Card > Paragraph",
+      "text": "Discover the different ways you can get in touch with our experienced agents.",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Items Container > Card > Button > Text",
+      "text": "Read More",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 23.579998016357422,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Container > Container > Text",
+      "text": "01 of 10",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > CTA > Text Container > Heading",
+      "text": "Start Your Real Estate Journey Today",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 48.0,
+      "lineHeight": 72.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > CTA > Text Container > Paragraph",
+      "text": "Your dream property is just a click away. Whether you're looking for a new home, a strategic investment, or expert real estate advice, Estatein is here to assist you every step of the way. Take the first step towards your real estate goals and explore our available properties or get in touch with our team for personalized assistance.",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > CTA > Button > Text",
+      "text": "Explore Properties",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Input Feild > Text",
+      "text": "Enter Your Email",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Footer Link Container > Column > Home",
+      "text": "Home",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.12000000476837158,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Hero Section",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Features",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Properties",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Testimonials",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "FAQ\u2019s",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Footer Link Container > Column > About Us",
+      "text": "About Us",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.12000000476837158,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Our Story",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Our Works",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "How It Works",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Our Team",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Our Clients",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Footer Link Container > Column > Properties",
+      "text": "Properties",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.12000000476837158,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Portfolio",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Categories",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Footer Link Container > Column > Services",
+      "text": "Services",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.12000000476837158,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Valuation Mastery",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Strategic Marketing",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Negotiation Wizardry",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Closing Success",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Property Management",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Footer Link Container > Column > Contact Us",
+      "text": "Contact Us",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 20.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.12000000476837158,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Contact Form",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer Link Container > Column > Link Container > Link ",
+      "text": "Our Offices",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer > Container > Sub Link Container > Link",
+      "text": "@2023 Estatein. All Rights Reserved.",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Footer > Container > Sub Link Container > Link",
+      "text": "Terms & Conditions",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 24.0,
+      "letterSpacing": -0.10800000429153443,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Sub Container > Container > Text Container > Heading",
+      "text": "Discover Your Dream Property with Estatein",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 60.0,
+      "lineHeight": 72.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Sub Container > Container > Text Container > Paragraph",
+      "text": "Your journey to finding the perfect property begins here. Explore our listings to find the home that matches your dreams.",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "\u2728",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "D",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "i",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "s",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "c",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "o",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "v",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "e",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "r",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "Y",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "o",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "u",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "r",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "D",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "r",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "e",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "a",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "m",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "P",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "r",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "o",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "p",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "e",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "r",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "t",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Text Container > Sub Container > Text Container > Text",
+      "text": "y",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 15.007604598999023,
+      "lineHeight": 18.009126663208008,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Buttons Container > Button > Text",
+      "text": "Learn More",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Buttons Container > Button > Text",
+      "text": "Browse Properties",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Heading",
+      "text": "200+",
+      "font": "Urbanist",
+      "weight": 700,
+      "size": 40.0,
+      "lineHeight": 60.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Paragraph",
+      "text": "Happy Customers",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Heading",
+      "text": "10k+",
+      "font": "Urbanist",
+      "weight": 700,
+      "size": 40.0,
+      "lineHeight": 60.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Paragraph",
+      "text": "Properties For Clients",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Heading",
+      "text": "16+",
+      "font": "Urbanist",
+      "weight": 700,
+      "size": 40.0,
+      "lineHeight": 60.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Text Container > Paragraph",
+      "text": "Years of Experience",
+      "font": "Urbanist",
+      "weight": 500,
+      "size": 18.0,
+      "lineHeight": 27.0,
+      "letterSpacing": 0.0,
+      "align": "LEFT",
+      "color": "#999999"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "Find Your Dream Home",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "CENTER",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "Unlock Property Value",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "CENTER",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "Effortless Property Management",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "CENTER",
+      "color": "#ffffff"
+    },
+    {
+      "path": "Container > Sub Container > Container > Text",
+      "text": "Smart Investments, Informed Decisions",
+      "font": "Urbanist",
+      "weight": 600,
+      "size": 20.0,
+      "lineHeight": 30.0,
+      "letterSpacing": 0.0,
+      "align": "CENTER",
+      "color": "#ffffff"
+    }
+  ],
+  "layoutSpecs": [
+    {
+      "path": "Home Page - Desktop > Header",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": null,
+      "cornerRadius": null,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 1920.0,
+      "h": 162.0
+    },
+    {
+      "path": "Home Page - Desktop > Header > Banner",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 160.0,
+        "paddingRight": 160.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 1920.0,
+      "h": 63.0
+    },
+    {
+      "path": "Home Page - Desktop > Header > Banner > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 4.0,
+        "paddingRight": 4.0,
+        "paddingTop": 4.0,
+        "paddingBottom": 4.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 75.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 32.0,
+      "h": 32.0
+    },
+    {
+      "path": "Home Page - Desktop > Header > Navigation Bar",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 162.0,
+        "paddingRight": 162.0,
+        "paddingTop": 20.0,
+        "paddingBottom": 20.0,
+        "itemSpacing": 292.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1920.0,
+      "h": 99.0
+    },
+    {
+      "path": "Home Page - Desktop > Header > Navigation Bar > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 16.0,
+        "paddingBottom": 16.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 136.0,
+      "h": 59.0
+    },
+    {
+      "path": "Home Page - Desktop > Header > Navigation Bar > Buttons Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 407.0,
+      "h": 55.0
+    },
+    {
+      "path": "Header > Navigation Bar > Buttons Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 96.0,
+      "h": 55.0
+    },
+    {
+      "path": "Home Page - Desktop > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 80.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 1040.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 200.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 140.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 14.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1200.0,
+      "h": 140.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 196.0,
+      "h": 63.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 50.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 820.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Items Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 692.0
+    },
+    {
+      "path": "Container > Sub Container > Items Container > Card",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 40.0,
+        "paddingRight": 40.0,
+        "paddingTop": 40.0,
+        "paddingBottom": 40.0,
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 512.0,
+      "h": 692.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Image",
+      "type": "RECTANGLE",
+      "layoutMode": null,
+      "padding": null,
+      "cornerRadius": 10.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 318.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 264.0
+    },
+    {
+      "path": "Items Container > Card > Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 6.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 96.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 43.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 8.0,
+        "paddingBottom": 8.0,
+        "itemSpacing": 4.0
+      },
+      "cornerRadius": 28.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 147.0,
+      "h": 43.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 8.0,
+        "paddingBottom": 8.0,
+        "itemSpacing": 4.0
+      },
+      "cornerRadius": 28.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 152.0,
+      "h": 43.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 8.0,
+        "paddingBottom": 8.0,
+        "itemSpacing": 4.0
+      },
+      "cornerRadius": 28.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 89.0,
+      "h": 43.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 50.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 65.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 2.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 103.0,
+      "h": 65.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 279.0,
+      "h": 63.0
+    },
+    {
+      "path": "Container > Sub Container > Items Container > Card",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 40.0,
+        "paddingRight": 40.0,
+        "paddingTop": 40.0,
+        "paddingBottom": 40.0,
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 512.0,
+      "h": 692.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Image",
+      "type": "RECTANGLE",
+      "layoutMode": null,
+      "padding": null,
+      "cornerRadius": 10.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 318.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 264.0
+    },
+    {
+      "path": "Items Container > Card > Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 6.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 96.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 43.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 8.0,
+        "paddingBottom": 8.0,
+        "itemSpacing": 4.0
+      },
+      "cornerRadius": 28.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 147.0,
+      "h": 43.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 8.0,
+        "paddingBottom": 8.0,
+        "itemSpacing": 4.0
+      },
+      "cornerRadius": 28.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 153.0,
+      "h": 43.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 8.0,
+        "paddingBottom": 8.0,
+        "itemSpacing": 4.0
+      },
+      "cornerRadius": 28.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 89.0,
+      "h": 43.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 50.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 65.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 2.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 103.0,
+      "h": 65.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 279.0,
+      "h": 63.0
+    },
+    {
+      "path": "Container > Sub Container > Items Container > Card",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 40.0,
+        "paddingRight": 40.0,
+        "paddingTop": 40.0,
+        "paddingBottom": 40.0,
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 512.0,
+      "h": 692.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Image",
+      "type": "RECTANGLE",
+      "layoutMode": null,
+      "padding": null,
+      "cornerRadius": 10.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 318.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 264.0
+    },
+    {
+      "path": "Items Container > Card > Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 6.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 96.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 43.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 8.0,
+        "paddingBottom": 8.0,
+        "itemSpacing": 4.0
+      },
+      "cornerRadius": 28.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 146.0,
+      "h": 43.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 8.0,
+        "paddingBottom": 8.0,
+        "itemSpacing": 4.0
+      },
+      "cornerRadius": 28.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 152.0,
+      "h": 43.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 8.0,
+        "paddingBottom": 8.0,
+        "itemSpacing": 4.0
+      },
+      "cornerRadius": 28.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 89.0,
+      "h": 43.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 50.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 432.0,
+      "h": 65.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 2.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 103.0,
+      "h": 65.0
+    },
+    {
+      "path": "Card > Container > Sub Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 279.0,
+      "h": 63.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingTop": 20.0,
+        "itemSpacing": 1123.0
+      },
+      "cornerRadius": null,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 1596.0,
+      "h": 78.0
+    },
+    {
+      "path": "Container > Sub Container > Container > Buttons Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 126.0,
+      "h": 58.0
+    },
+    {
+      "path": "Sub Container > Container > Buttons Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 69.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 58.0,
+      "h": 58.0
+    },
+    {
+      "path": "Sub Container > Container > Buttons Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 69.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 58.0,
+      "h": 58.0
+    },
+    {
+      "path": "Home Page - Desktop > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 80.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 763.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 200.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 113.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 14.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1181.0,
+      "h": 113.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 215.0,
+      "h": 63.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 50.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 570.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Items Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 442.0
+    },
+    {
+      "path": "Container > Sub Container > Items Container > Card",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 50.0,
+        "paddingRight": 50.0,
+        "paddingTop": 50.0,
+        "paddingBottom": 50.0,
+        "itemSpacing": 40.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 512.0,
+      "h": 442.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 260.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 14.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 412.0,
+      "h": 158.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 12.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 412.0,
+      "h": 60.0
+    },
+    {
+      "path": "Items Container > Card > Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 2.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 340.0,
+      "h": 59.0
+    },
+    {
+      "path": "Container > Sub Container > Items Container > Card",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 50.0,
+        "paddingRight": 50.0,
+        "paddingTop": 50.0,
+        "paddingBottom": 50.0,
+        "itemSpacing": 40.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 512.0,
+      "h": 442.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 260.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 14.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 412.0,
+      "h": 158.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 12.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 412.0,
+      "h": 60.0
+    },
+    {
+      "path": "Items Container > Card > Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 2.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 340.0,
+      "h": 59.0
+    },
+    {
+      "path": "Container > Sub Container > Items Container > Card",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 50.0,
+        "paddingRight": 50.0,
+        "paddingTop": 50.0,
+        "paddingBottom": 50.0,
+        "itemSpacing": 40.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 512.0,
+      "h": 442.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 260.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Items Container > Card > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 44.0,
+      "h": 44.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 14.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 412.0,
+      "h": 158.0
+    },
+    {
+      "path": "Sub Container > Items Container > Card > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 12.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 412.0,
+      "h": 60.0
+    },
+    {
+      "path": "Items Container > Card > Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 2.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 340.0,
+      "h": 59.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingTop": 20.0,
+        "itemSpacing": 1123.0
+      },
+      "cornerRadius": null,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 1596.0,
+      "h": 78.0
+    },
+    {
+      "path": "Container > Sub Container > Container > Buttons Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 126.0,
+      "h": 58.0
+    },
+    {
+      "path": "Sub Container > Container > Buttons Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 69.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 58.0,
+      "h": 58.0
+    },
+    {
+      "path": "Sub Container > Container > Buttons Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 69.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 58.0,
+      "h": 58.0
+    },
+    {
+      "path": "Home Page - Desktop > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 80.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 694.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 200.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 140.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 14.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1236.0,
+      "h": 140.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 160.0,
+      "h": 63.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 50.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 474.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Container > Items Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1596.0,
+      "h": 346.0
+    },
+    {
+      "path": "Container > Container > Items Container > Card",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 50.0,
+        "paddingRight": 50.0,
+        "paddingTop": 50.0,
+        "paddingBottom": 50.0,
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 512.0,
+      "h": 346.0
+    },
+    {
+      "path": "Container > Items Container > Card > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 134.0,
+      "h": 60.0
+    },
+    {
+      "path": "Container > Container > Items Container > Card",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 50.0,
+        "paddingRight": 50.0,
+        "paddingTop": 50.0,
+        "paddingBottom": 50.0,
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 512.0,
+      "h": 346.0
+    },
+    {
+      "path": "Container > Items Container > Card > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 134.0,
+      "h": 60.0
+    },
+    {
+      "path": "Container > Container > Items Container > Card",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 50.0,
+        "paddingRight": 50.0,
+        "paddingTop": 50.0,
+        "paddingBottom": 50.0,
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 512.0,
+      "h": 346.0
+    },
+    {
+      "path": "Container > Items Container > Card > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 134.0,
+      "h": 60.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingTop": 20.0,
+        "itemSpacing": 1123.0
+      },
+      "cornerRadius": null,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 1596.0,
+      "h": 78.0
+    },
+    {
+      "path": "Container > Container > Container > Buttons Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 126.0,
+      "h": 58.0
+    },
+    {
+      "path": "Container > Container > Buttons Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 69.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 58.0,
+      "h": 58.0
+    },
+    {
+      "path": "Container > Container > Buttons Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 69.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 58.0,
+      "h": 58.0
+    },
+    {
+      "path": "Home Page - Desktop > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": null,
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1920.0,
+      "h": 925.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > CTA",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 162.0,
+        "paddingRight": 162.0,
+        "paddingTop": 100.0,
+        "paddingBottom": 100.0,
+        "itemSpacing": 250.0
+      },
+      "cornerRadius": null,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 1920.0,
+      "h": 367.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > CTA > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 14.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1154.0,
+      "h": 167.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > CTA > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 192.0,
+      "h": 63.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Footer",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": null,
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1920.0,
+      "h": 558.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Footer > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 162.0,
+        "paddingRight": 162.0,
+        "paddingTop": 100.0,
+        "paddingBottom": 100.0,
+        "itemSpacing": 80.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1920.0,
+      "h": 454.0
+    },
+    {
+      "path": "Container > Footer > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 538.0,
+      "h": 144.0
+    },
+    {
+      "path": "Footer > Container > Sub Container > Input Feild",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 423.0,
+      "h": 66.0
+    },
+    {
+      "path": "Container > Footer > Container > Footer Link Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 50.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 978.0,
+      "h": 254.0
+    },
+    {
+      "path": "Footer > Container > Footer Link Container > Column",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 100.0,
+      "h": 254.0
+    },
+    {
+      "path": "Container > Footer Link Container > Column > Link Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 100.0,
+      "h": 200.0
+    },
+    {
+      "path": "Footer > Container > Footer Link Container > Column",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 102.0,
+      "h": 254.0
+    },
+    {
+      "path": "Container > Footer Link Container > Column > Link Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 102.0,
+      "h": 200.0
+    },
+    {
+      "path": "Footer > Container > Footer Link Container > Column",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 88.0,
+      "h": 122.0
+    },
+    {
+      "path": "Container > Footer Link Container > Column > Link Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 86.0,
+      "h": 68.0
+    },
+    {
+      "path": "Footer > Container > Footer Link Container > Column",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 179.0,
+      "h": 254.0
+    },
+    {
+      "path": "Container > Footer Link Container > Column > Link Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 179.0,
+      "h": 200.0
+    },
+    {
+      "path": "Footer > Container > Footer Link Container > Column",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 30.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 108.0,
+      "h": 122.0
+    },
+    {
+      "path": "Container > Footer Link Container > Column > Link Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 108.0,
+      "h": 68.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Footer > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 162.0,
+        "paddingRight": 162.0,
+        "paddingTop": 16.0,
+        "paddingBottom": 16.0,
+        "itemSpacing": 1216.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1920.0,
+      "h": 104.0
+    },
+    {
+      "path": "Container > Footer > Container > Sub Link Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 38.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 473.0,
+      "h": 44.0
+    },
+    {
+      "path": "Container > Footer > Container > Social Icon",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 238.0,
+      "h": 72.0
+    },
+    {
+      "path": "Footer > Container > Social Icon > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 58.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 52.0,
+      "h": 52.0
+    },
+    {
+      "path": "Footer > Container > Social Icon > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 58.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 52.0,
+      "h": 52.0
+    },
+    {
+      "path": "Footer > Container > Social Icon > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 58.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 52.0,
+      "h": 52.0
+    },
+    {
+      "path": "Footer > Container > Social Icon > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 58.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 52.0,
+      "h": 52.0
+    },
+    {
+      "path": "Home Page - Desktop > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": null,
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1920.0,
+      "h": 1066.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 80.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 1920.0,
+      "h": 814.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 162.0,
+        "itemSpacing": 60.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 920.0,
+      "h": 814.0
+    },
+    {
+      "path": "Container > Sub Container > Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "itemSpacing": 24.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 758.0,
+      "h": 222.0
+    },
+    {
+      "path": "Sub Container > Container > Text Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 47.727272033691406,
+        "paddingRight": 47.727272033691406,
+        "paddingTop": 47.727272033691406,
+        "paddingBottom": 47.727272033691406,
+        "itemSpacing": 15.909090995788574
+      },
+      "cornerRadius": 159.09091186523438,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.5909091234207153
+      },
+      "opacity": null,
+      "w": 175.0,
+      "h": 175.0
+    },
+    {
+      "path": "Container > Text Container > Sub Container > Shape",
+      "type": "RECTANGLE",
+      "layoutMode": null,
+      "padding": null,
+      "cornerRadius": 89.09091186523438,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.5909091234207153
+      },
+      "opacity": null,
+      "w": 79.5,
+      "h": 79.5
+    },
+    {
+      "path": "Container > Sub Container > Container > Buttons Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 758.0,
+      "h": 63.0
+    },
+    {
+      "path": "Sub Container > Container > Buttons Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 139.0,
+      "h": 63.0
+    },
+    {
+      "path": "Sub Container > Container > Buttons Container > Button",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 18.0,
+        "paddingBottom": 18.0,
+        "itemSpacing": 8.0
+      },
+      "cornerRadius": 10.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 191.0,
+      "h": 63.0
+    },
+    {
+      "path": "Container > Sub Container > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 758.0,
+      "h": 121.0
+    },
+    {
+      "path": "Sub Container > Container > Sub Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 16.0,
+        "paddingBottom": 16.0,
+        "itemSpacing": 2.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 239.3,
+      "h": 121.0
+    },
+    {
+      "path": "Sub Container > Container > Sub Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 16.0,
+        "paddingBottom": 16.0,
+        "itemSpacing": 2.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 239.3,
+      "h": 121.0
+    },
+    {
+      "path": "Sub Container > Container > Sub Container > Text Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 24.0,
+        "paddingRight": 24.0,
+        "paddingTop": 16.0,
+        "paddingBottom": 16.0,
+        "itemSpacing": 2.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 239.3,
+      "h": 121.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": null,
+      "stroke": null,
+      "opacity": null,
+      "w": 920.0,
+      "h": 814.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 20.0,
+        "paddingRight": 20.0,
+        "paddingTop": 20.0,
+        "paddingBottom": 20.0,
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": null,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 1920.0,
+      "h": 252.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 20.0,
+        "paddingRight": 20.0,
+        "paddingTop": 40.0,
+        "paddingBottom": 40.0,
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 455.0,
+      "h": 212.0
+    },
+    {
+      "path": "Container > Sub Container > Container > Icon Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 82.0,
+      "h": 82.0
+    },
+    {
+      "path": "Sub Container > Container > Icon Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 62.0,
+      "h": 62.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 20.0,
+        "paddingRight": 20.0,
+        "paddingTop": 40.0,
+        "paddingBottom": 40.0,
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 455.0,
+      "h": 212.0
+    },
+    {
+      "path": "Container > Sub Container > Container > Icon Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 82.0,
+      "h": 82.0
+    },
+    {
+      "path": "Sub Container > Container > Icon Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 62.0,
+      "h": 62.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 20.0,
+        "paddingRight": 20.0,
+        "paddingTop": 40.0,
+        "paddingBottom": 40.0,
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 455.0,
+      "h": 212.0
+    },
+    {
+      "path": "Container > Sub Container > Container > Icon Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 82.0,
+      "h": 82.0
+    },
+    {
+      "path": "Sub Container > Container > Icon Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 62.0,
+      "h": 62.0
+    },
+    {
+      "path": "Home Page - Desktop > Container > Sub Container > Container",
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "padding": {
+        "paddingLeft": 20.0,
+        "paddingRight": 20.0,
+        "paddingTop": 40.0,
+        "paddingBottom": 40.0,
+        "itemSpacing": 20.0
+      },
+      "cornerRadius": 12.0,
+      "stroke": {
+        "color": "#262626",
+        "weight": 1.0
+      },
+      "opacity": null,
+      "w": 455.0,
+      "h": 212.0
+    },
+    {
+      "path": "Container > Sub Container > Container > Icon Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 10.0,
+        "paddingRight": 10.0,
+        "paddingTop": 10.0,
+        "paddingBottom": 10.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 82.0,
+      "h": 82.0
+    },
+    {
+      "path": "Sub Container > Container > Icon Container > Container",
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "padding": {
+        "paddingLeft": 14.0,
+        "paddingRight": 14.0,
+        "paddingTop": 14.0,
+        "paddingBottom": 14.0,
+        "itemSpacing": 10.0
+      },
+      "cornerRadius": 100.0,
+      "stroke": null,
+      "opacity": null,
+      "w": 62.0,
+      "h": 62.0
+    }
+  ]
+}
