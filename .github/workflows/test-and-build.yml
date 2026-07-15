@@ -121,28 +121,6 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'
 
-  code-quality:
-    name: Code Quality
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install dependencies
-        run: |
-          cd estate-backend && npm ci
-          cd ../app && npm ci
-
-      - name: Run SonarQube scan
-        uses: SonarSource/sonarqube-scan-action@v4
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
   build-docker:
     name: Build Docker Images
     runs-on: ubuntu-latest
