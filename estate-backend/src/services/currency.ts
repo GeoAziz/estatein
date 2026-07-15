@@ -90,7 +90,7 @@ export function parsePrice(priceString: string): { amount: number; currency: Cur
   const gbpPattern = /^£\s*(\d+(?:,\d{3})*(?:\.\d{2})?)/;
 
   let match;
-  let currency = Currency.USD;
+  let currency: Currency;
 
   if ((match = priceString.match(kshPattern))) {
     currency = Currency.KSH;

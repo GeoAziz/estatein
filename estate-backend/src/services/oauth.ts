@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import * as jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 
 export interface GoogleTokenPayload {
   iss: string;
@@ -53,7 +54,7 @@ class GoogleOAuthProvider {
       const ticket = await this.verifyIdToken(idToken);
       return ticket.getPayload() as unknown as GoogleTokenPayload;
     } catch (error) {
-      throw new Error(`Google token verification failed: ${error}`);
+      throw new Error(`Google token verification failed: ${error}`, { cause: error });
     }
   }
 
@@ -66,7 +67,7 @@ class GoogleOAuthProvider {
         getPayload: () => response.data,
       };
     } catch (error) {
-      throw new Error('Invalid Google ID token');
+      throw new Error('Invalid Google ID token', { cause: error });
     }
   }
 
@@ -82,7 +83,7 @@ class GoogleOAuthProvider {
 
       return response.data;
     } catch (error) {
-      throw new Error(`Google token exchange failed: ${error}`);
+      throw new Error(`Google token exchange failed: ${error}`, { cause: error });
     }
   }
 
@@ -162,7 +163,7 @@ class AppleOAuthProvider {
 
       return decoded.payload as AppleTokenPayload;
     } catch (error) {
-      throw new Error(`Apple token verification failed: ${error}`);
+      throw new Error(`Apple token verification failed: ${error}`, { cause: error });
     }
   }
 
@@ -179,7 +180,7 @@ class AppleOAuthProvider {
 
       return response.data;
     } catch (error) {
-      throw new Error(`Apple token exchange failed: ${error}`);
+      throw new Error(`Apple token exchange failed: ${error}`, { cause: error });
     }
   }
 
@@ -196,22 +197,13 @@ class AppleOAuthProvider {
   private jwkToPem(jwk: any): string {
     // This is a simplified version. In production, use a library like 'jwk-to-pem'
     // For now, we'll construct the PEM format from JWK
-    const crypto = require('crypto');
-
     if (jwk.kty === 'RSA') {
-      const modulusBuffer = Buffer.from(jwk.n, 'base64');
-      const exponentBuffer = Buffer.from(jwk.e, 'base64');
-
       const publicKey = crypto.createPublicKey({
-        key: {
-          kty: 'RSA',
-          n: modulusBuffer,
-          e: exponentBuffer,
-        },
+        key: { kty: 'RSA', n: jwk.n, e: jwk.e },
         format: 'jwk',
       });
 
-      return publicKey.export({ format: 'pem', type: 'spki' });
+      return publicKey.export({ format: 'pem', type: 'spki' }).toString();
     }
 
     throw new Error('Unsupported key type');

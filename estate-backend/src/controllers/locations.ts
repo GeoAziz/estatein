@@ -87,7 +87,7 @@ export async function getCounties(req: Request, res: Response) {
   try {
     const { search } = req.query;
 
-    let query = prisma.county.findMany({
+    const query = prisma.county.findMany({
       orderBy: { name: 'asc' },
     });
 
@@ -129,7 +129,7 @@ export async function getEstates(req: Request, res: Response) {
   try {
     const { county, city, search, limit = '50' } = req.query;
 
-    let whereClause: any = {};
+    const whereClause: any = {};
 
     if (county) {
       whereClause.county = county;
