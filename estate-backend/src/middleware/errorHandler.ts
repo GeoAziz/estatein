@@ -2,6 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import type { AuthRequest } from "../types/index.js";
 import { AppError, ValidationError } from "../utils/errors.js";
 import { logError } from "../services/telemetry.js";
+import { Sentry } from "../config/sentry.js";
 import logger from "./logging.js";
 
 export function errorHandler(err: Error, req: Request, res: Response, _next: NextFunction) {
@@ -31,6 +32,7 @@ export function errorHandler(err: Error, req: Request, res: Response, _next: Nex
   }
 
   logger.error({ err, path: req.path, method: req.method }, "Unhandled error");
+  Sentry.captureException(err, { extra: { path: req.path, method: req.method } });
   logError({
     source: "backend",
     message: err.message,

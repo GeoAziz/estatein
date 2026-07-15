@@ -1,6 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { AlertTriangle } from "lucide-react";
 import { apiClient } from "../lib/api-client";
+import { Sentry } from "../lib/sentry";
 import { PrimaryButton } from "./ui";
 
 type Props = { children: ReactNode };
@@ -20,6 +21,7 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
+    Sentry.captureException(error, { extra: { componentStack: info.componentStack ?? undefined } });
     apiClient.reportError({
       message: error.message,
       stack: error.stack,
