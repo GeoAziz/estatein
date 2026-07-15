@@ -17,6 +17,10 @@ RUN npm ci
 # Copy source code
 COPY . .
 
+# Generate the Prisma client (schema-derived types the TypeScript build and
+# runtime both depend on — `npm ci` alone does not produce these).
+RUN npx prisma generate
+
 # Build TypeScript
 RUN npm run build
 
@@ -32,7 +36,13 @@ RUN apk add --no-cache dumb-init
 COPY package*.json ./
 
 # Install production dependencies only
-RUN npm ci --only=production
+RUN npm ci --omit=dev
+
+# `npm ci --omit=dev` installs the plain @prisma/client package, but not the
+# generated client code (that only exists after `prisma generate`, run above
+# in the builder stage) — copy the generated output over rather than
+# regenerating, since regenerating here would need the dev-only prisma CLI.
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 # Copy built application from builder
 COPY --from=builder /app/dist ./dist
@@ -41,8 +51,7 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 
 # Create health check script
-COPY --from=builder /app/.docker/health-check.sh ./health-check.sh
-RUN chmod +x ./health-check.sh
+COPY --from=builder /app/.docker/health-check.js ./health-check.js
 
 # Expose port
 EXPOSE 3000
