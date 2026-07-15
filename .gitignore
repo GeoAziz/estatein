@@ -17,3 +17,6 @@ serviceAccountKey.json
 firebase-key.json
 *.pem
 *.key
+
+# Not part of this project's tracked source
+landing-pages/
