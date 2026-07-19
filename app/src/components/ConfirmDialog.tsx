@@ -9,7 +9,8 @@ export type ConfirmDialogProps = {
   cancelLabel?: string;
   danger?: boolean;
   requireText?: string;
-  onConfirm: () => void;
+  prompt?: { label: string; placeholder?: string; required?: boolean };
+  onConfirm: (promptValue?: string) => void;
   onCancel: () => void;
 };
 
@@ -20,14 +21,16 @@ export default function ConfirmDialog({
   cancelLabel = "Cancel",
   danger = true,
   requireText,
+  prompt,
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
   const [typed, setTyped] = useState("");
+  const [promptValue, setPromptValue] = useState("");
   const dialogRef = useRef<HTMLDivElement>(null);
   useModalA11y(dialogRef, onCancel);
 
-  const canConfirm = !requireText || typed.trim() === requireText;
+  const canConfirm = (!requireText || typed.trim() === requireText) && (!prompt?.required || promptValue.trim().length > 0);
 
   return (
     <div
@@ -69,6 +72,20 @@ export default function ConfirmDialog({
           </label>
         )}
 
+        {prompt && (
+          <label className="flex flex-col gap-1.5">
+            <span className="text-xs text-muted">{prompt.label}</span>
+            <textarea
+              autoFocus={!requireText}
+              value={promptValue}
+              onChange={(e) => setPromptValue(e.target.value)}
+              placeholder={prompt.placeholder}
+              rows={3}
+              className="resize-none rounded-lg border border-border bg-transparent px-3 py-2 text-sm text-white placeholder:text-muted/50 focus:border-primary focus:outline-none"
+            />
+          </label>
+        )}
+
         <div className="flex justify-end gap-3">
           <button
             onClick={onCancel}
@@ -77,7 +94,7 @@ export default function ConfirmDialog({
             {cancelLabel}
           </button>
           <button
-            onClick={onConfirm}
+            onClick={() => onConfirm(prompt ? promptValue.trim() : undefined)}
             disabled={!canConfirm}
             className={`rounded-[10px] px-5 py-2.5 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-40 ${
               danger ? "bg-red-500 hover:bg-red-600" : "bg-primary hover:bg-primary/90"

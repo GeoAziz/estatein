@@ -1,5 +1,6 @@
 import { GuideToc, type AccordionSection } from "../components/Accordion";
 import { Section, SectionHeading } from "../components/ui";
+import SEO from "../components/SEO";
 
 const SECTIONS: AccordionSection[] = [
   {
@@ -65,6 +66,10 @@ const SECTIONS: AccordionSection[] = [
 export default function Privacy() {
   return (
     <>
+      <SEO
+        title="Privacy Policy"
+        description="Learn how Estatein collects, uses, and protects your personal information when you use our website and real estate services."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           eyebrow="Last Updated: June 1, 2026"

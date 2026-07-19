@@ -15,6 +15,7 @@ import {
 import { PrimaryButton, Section, SectionHeading } from "../components/ui";
 import ServiceHubBar from "../components/ServiceHubBar";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 import { INVESTMENT_SERVICES, MANAGEMENT_SERVICES, SELLING_SERVICES } from "../data/services";
 
 const SELLING_ICONS = [Compass, TrendingUp, Handshake, FileCheck2];
@@ -60,6 +61,10 @@ function ServiceBanner({ title, body }: { title: string; body: string }) {
 export default function Services() {
   return (
     <>
+      <SEO
+        title="Services"
+        description="Explore Estatein's real estate services covering selling, property management, and investment support tailored to your goals."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           title="Elevate Your Real Estate Experience"

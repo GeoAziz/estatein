@@ -1,9 +1,11 @@
 import { Section } from "../components/ui";
 import { PrimaryButton } from "../components/ui";
+import SEO from "../components/SEO";
 
 export default function NotFound() {
   return (
     <Section className="flex flex-col items-center gap-6 py-32 text-center">
+      <SEO title="Page Not Found" description="The page you're looking for doesn't exist or has been moved." />
       <span className="text-sm font-medium uppercase tracking-wide text-primary-text">404</span>
       <h1 className="text-4xl font-semibold text-white sm:text-5xl">Page Not Found</h1>
       <p className="max-w-md text-base text-muted">

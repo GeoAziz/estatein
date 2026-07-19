@@ -1,6 +1,7 @@
 import { CheckCircle2, Sparkles } from "lucide-react";
 import { Section, SectionHeading, PrimaryButton } from "../components/ui";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 
 const TIERS = [
   {
@@ -58,6 +59,10 @@ const TIERS = [
 export default function Pricing() {
   return (
     <>
+      <SEO
+        title="Pricing Plans"
+        description="Compare Estatein's Starter, Professional, and other subscription plans for agents and agencies, including listing limits and analytics features."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           align="center"

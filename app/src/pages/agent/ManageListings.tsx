@@ -23,6 +23,7 @@ import { useToast } from "../../lib/toast";
 import { useConfirm } from "../../lib/confirm";
 import { apiClient } from "../../lib/api-client";
 import { mapListing, unwrapList, type NormalizedListing } from "../../lib/normalizers";
+import SEO from "../../components/SEO";
 
 type AgentListing = NormalizedListing;
 
@@ -201,6 +202,7 @@ export default function ManageListings() {
 
   return (
     <DashboardLayout navItems={NAV}>
+      <SEO title="My Listings" description="Manage your published, pending, and draft property listings on Estatein." />
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <h1 className="text-2xl font-semibold text-white sm:text-3xl">My Listings</h1>
         <Link

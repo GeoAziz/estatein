@@ -4,24 +4,24 @@ import ConfirmDialog, { type ConfirmDialogProps } from "../components/ConfirmDia
 type ConfirmOptions = Omit<ConfirmDialogProps, "onConfirm" | "onCancel">;
 
 type ConfirmContextValue = {
-  confirm: (options: ConfirmOptions) => Promise<boolean>;
+  confirm: (options: ConfirmOptions) => Promise<string | boolean>;
 };
 
 const ConfirmContext = createContext<ConfirmContextValue | null>(null);
 
 export function ConfirmProvider({ children }: { children: ReactNode }) {
   const [options, setOptions] = useState<ConfirmOptions | null>(null);
-  const resolver = useRef<(value: boolean) => void>(() => {});
+  const resolver = useRef<(value: string | boolean) => void>(() => {});
 
   const confirm = useCallback((opts: ConfirmOptions) => {
     setOptions(opts);
-    return new Promise<boolean>((resolve) => {
+    return new Promise<string | boolean>((resolve) => {
       resolver.current = resolve;
     });
   }, []);
 
-  function handleConfirm() {
-    resolver.current(true);
+  function handleConfirm(promptValue?: string) {
+    resolver.current(promptValue ?? true);
     setOptions(null);
   }
   function handleCancel() {

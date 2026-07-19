@@ -1,11 +1,16 @@
 import { Download, Mail } from "lucide-react";
 import { Section, SectionHeading } from "../components/ui";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 import { MEDIA_MENTIONS, PRESS_RELEASES } from "../data/content";
 
 export default function Press() {
   return (
     <>
+      <SEO
+        title="Press & Media"
+        description="Press releases, media coverage, and company announcements from Estatein — Kenya's growing real estate marketplace."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           align="center"

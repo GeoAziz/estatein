@@ -5,11 +5,13 @@ export default function SEO({
   description = "Discover Your Dream Property with Estatein. Browse properties for sale, rent, and investment opportunities.",
   canonical,
   image,
+  jsonLd,
 }: {
   title?: string;
   description?: string;
   canonical?: string;
   image?: string;
+  jsonLd?: object | object[];
 }) {
   useEffect(() => {
     const fullTitle = title === "Estatein" ? title : `${title} | Estatein`;
@@ -39,9 +41,15 @@ export default function SEO({
     setProperty("og:title", fullTitle);
     setProperty("og:description", description);
     setProperty("og:type", "website");
+    setProperty("og:site_name", "Estatein");
+
+    setMeta("twitter:card", image ? "summary_large_image" : "summary");
+    setMeta("twitter:title", fullTitle);
+    setMeta("twitter:description", description);
 
     if (image) {
       setProperty("og:image", image);
+      setMeta("twitter:image", image);
     }
 
     if (canonical) {
@@ -52,12 +60,28 @@ export default function SEO({
         document.head.appendChild(link);
       }
       link.setAttribute("href", canonical);
+      setProperty("og:url", canonical);
+    }
+
+    const injectedScripts: HTMLScriptElement[] = [];
+    if (jsonLd) {
+      const entries = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+      for (const entry of entries) {
+        const script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.textContent = JSON.stringify(entry);
+        document.head.appendChild(script);
+        injectedScripts.push(script);
+      }
     }
 
     return () => {
       document.title = "Estatein";
+      for (const script of injectedScripts) {
+        script.remove();
+      }
     };
-  }, [title, description, canonical, image]);
+  }, [title, description, canonical, image, jsonLd]);
 
   return null;
 }

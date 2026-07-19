@@ -125,3 +125,70 @@ export async function getStatus(userId: string) {
 
   return { enabled: user.twoFactorEnabled };
 }
+
+/**
+ * Generate 10 backup codes for 2FA recovery.
+ * Returns plaintext codes once; they are stored hashed in the database.
+ */
+export async function generateBackupCodes(userId: string): Promise<{ codes: string[] }> {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw new NotFoundError("User not found");
+  if (!user.twoFactorEnabled) {
+    throw new AuthenticationError("Two-factor authentication is not enabled");
+  }
+
+  // Generate 10 unique codes
+  const plainCodes: string[] = [];
+  const hashedCodes: string[] = [];
+
+  for (let i = 0; i < 10; i++) {
+    const code = crypto.randomBytes(4).toString("hex").toUpperCase();
+    plainCodes.push(code);
+    const hash = crypto.createHash("sha256").update(code).digest("hex");
+    hashedCodes.push(hash);
+  }
+
+  // Delete old backup codes and create new ones
+  await prisma.twoFactorBackupCode.deleteMany({ where: { userId } });
+
+  await Promise.all(
+    hashedCodes.map(codeHash =>
+      prisma.twoFactorBackupCode.create({
+        data: { userId, codeHash },
+      })
+    )
+  );
+
+  return { codes: plainCodes };
+}
+
+/**
+ * Verify and use a backup code.
+ * Returns true if valid, false if invalid.
+ * Marks the code as used if valid.
+ */
+export async function verifyBackupCode(userId: string, code: string): Promise<boolean> {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw new NotFoundError("User not found");
+  if (!user.twoFactorEnabled) {
+    throw new AuthenticationError("Two-factor authentication is not enabled");
+  }
+
+  const codeHash = crypto.createHash("sha256").update(code).digest("hex");
+
+  const backupCode = await prisma.twoFactorBackupCode.findFirst({
+    where: { userId, codeHash, used: false },
+  });
+
+  if (!backupCode) {
+    throw new AuthenticationError("Invalid or already-used backup code");
+  }
+
+  // Mark as used
+  await prisma.twoFactorBackupCode.update({
+    where: { id: backupCode.id },
+    data: { used: true, usedAt: new Date() },
+  });
+
+  return true;
+}

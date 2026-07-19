@@ -37,7 +37,7 @@ export async function getPendingListings(req: AuthRequest, res: Response, next: 
 export async function approveListing(req: AuthRequest, res: Response, next: NextFunction) {
   try {
     const id = String(req.params.id);
-    const { notes } = req.body;
+    const { notes, reason } = req.body;
 
     const listing = await prisma.listing.findUnique({
       where: { id },
@@ -153,11 +153,12 @@ export async function updateUserStatus(req: AuthRequest, res: Response, next: Ne
 
 export async function getStats(req: AuthRequest, res: Response, next: NextFunction) {
   try {
-    const [totalUsers, totalListings, pendingApprovals, activeListings] = await Promise.all([
+    const [totalUsers, totalListings, pendingApprovals, activeListings, pendingVerifications] = await Promise.all([
       prisma.user.count(),
       prisma.listing.count(),
       prisma.listing.count({ where: { status: "pending" } }),
       prisma.listing.count({ where: { status: "active" } }),
+      prisma.user.count({ where: { verificationStatus: "pending" } }),
     ]);
 
     const totalInquiries = await prisma.inquiry.count();
@@ -168,7 +169,18 @@ export async function getStats(req: AuthRequest, res: Response, next: NextFuncti
       totalInquiries,
       pendingApprovals,
       activeListings,
+      pendingVerifications,
     });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function reindexProperties(req: AuthRequest, res: Response, next: NextFunction) {
+  try {
+    const { reindexAllProperties } = await import("../services/elasticsearch.js");
+    const count = await reindexAllProperties();
+    sendSuccess(res, { reindexed: count }, 200, `Reindexed ${count} properties`);
   } catch (err) {
     next(err);
   }

@@ -20,3 +20,6 @@ firebase-key.json
 
 # Not part of this project's tracked source
 landing-pages/
+
+# ngrok config (contains auth token)
+ngrok.yml

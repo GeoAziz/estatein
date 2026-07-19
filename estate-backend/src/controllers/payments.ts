@@ -105,19 +105,31 @@ export async function initiatePayment(req: Request, res: Response) {
           status: 'initiated',
           message: mpesaResponse.CustomerMessage,
         });
-      } catch (mpesaError) {
+      } catch (mpesaError: any) {
         // Update payment status to failed
+        const failureReason = mpesaError.message || String(mpesaError);
         await prisma.payment.update({
           where: { id: payment.id },
           data: {
             status: 'failed',
-            failureReason: String(mpesaError),
+            failureReason,
           },
         });
 
         console.error('M-Pesa initiation error:', mpesaError);
+
+        // Return user-friendly error messages
+        let userMessage = 'Failed to initiate payment. Please try again.';
+        if (failureReason.includes('timeout') || failureReason.includes('ECONNREFUSED')) {
+          userMessage = 'Network error. Please check your internet and try again.';
+        } else if (failureReason.includes('Invalid')) {
+          userMessage = 'Invalid phone number or payment details. Please check and retry.';
+        } else if (failureReason.includes('balance')) {
+          userMessage = 'Insufficient M-Pesa balance. Please top up and try again.';
+        }
+
         return res.status(400).json({
-          error: 'Failed to initiate M-Pesa payment',
+          error: userMessage,
         });
       }
     }

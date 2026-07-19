@@ -37,6 +37,11 @@ export const UpdateViewingStatusSchema = z.object({
   viewingStatus: z.enum(["requested", "confirmed", "cancelled"]),
 });
 
+export const UpdateViewingScheduleSchema = z.object({
+  viewingDate: z.coerce.date(),
+  viewingTime: z.string().min(1),
+});
+
 export const CreateReviewSchema = z.object({
   rating: z.number().int().min(1).max(5),
   text: z.string().max(1000).optional(),
@@ -78,6 +83,16 @@ export const AdminRejectSchema = z.object({
 
 export const AdminUserStatusSchema = z.object({
   status: z.enum(["active", "suspended", "deleted"]),
+});
+
+export const AdminVerifyUserSchema = z.object({
+  action: z.enum(["verified", "rejected"]),
+  reason: z.string().max(500).optional(),
+});
+
+export const SubmitVerificationSchema = z.object({
+  idDocumentUrl: z.string().url("Valid document URL is required"),
+  idNumber: z.string().min(5, "ID number must be at least 5 characters").max(50),
 });
 
 export const AdminReportResolveSchema = z.object({

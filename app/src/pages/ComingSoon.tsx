@@ -3,6 +3,7 @@ import { Bath, BedDouble, CalendarClock, CheckCircle2 } from "lucide-react";
 import { Section, SectionHeading } from "../components/ui";
 import BlurImage from "../components/BlurImage";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 import { COMING_SOON_PROPERTIES } from "../data/listings";
 
 function NotifyForm() {
@@ -71,6 +72,10 @@ function NotifyForm() {
 export default function ComingSoon() {
   return (
     <>
+      <SEO
+        title="Coming Soon Properties"
+        description="Get an early look at upcoming property listings in Kenya before they hit the market, and sign up to be notified the moment they launch."
+      />
       <Section className="border-b border-border pt-12 lg:pt-16">
         <SectionHeading
           align="center"

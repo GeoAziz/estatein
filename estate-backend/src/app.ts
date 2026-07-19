@@ -3,12 +3,22 @@ import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 import cookieParser from "cookie-parser";
+import * as Sentry from "@sentry/node";
 import { verifyToken } from "./middleware/auth.js";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import { requestLogger } from "./middleware/logging.js";
 import { apiLimiter } from "./middleware/rateLimit.js";
 import { securityHeaders } from "./middleware/security.js";
 import routes from "./routes/index.js";
+
+// Initialize Sentry for error tracking in production (must be before express init)
+if (process.env.SENTRY_DSN) {
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    environment: process.env.NODE_ENV || "development",
+    tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1.0,
+  });
+}
 
 const app = express();
 
@@ -53,6 +63,14 @@ app.use("/api", routes);
 
 // 404 handler
 app.use(notFoundHandler);
+
+// Sentry error handler (capture exceptions, must be before generic error handler)
+if (process.env.SENTRY_DSN) {
+  app.use((err: any, req: any, res: any, next: any) => {
+    Sentry.captureException(err);
+    next(err);
+  });
+}
 
 // Global error handler
 app.use(errorHandler);

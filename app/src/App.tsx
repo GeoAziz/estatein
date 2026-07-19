@@ -36,12 +36,20 @@ import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import BuyerDashboard from "./pages/dashboard/BuyerDashboard";
 import AgentDashboard from "./pages/dashboard/AgentDashboard";
-import AdminDashboard from "./pages/dashboard/AdminDashboard";
+import PropertyManagerDashboard from "./pages/dashboard/PropertyManagerDashboard";
+// DeveloperDashboard deferred to v2 (new-construction sales — out of MVP scope)
+import AdminOverview from "./pages/dashboard/admin/AdminOverview";
+import AdminPendingListings from "./pages/dashboard/admin/AdminPendingListings";
+import AdminUsers from "./pages/dashboard/admin/AdminUsers";
+import AdminReported from "./pages/dashboard/admin/AdminReported";
+import AdminSupport from "./pages/dashboard/admin/AdminSupport";
 import AnalyticsDashboard from "./pages/dashboard/AnalyticsDashboard";
 import Settings from "./pages/dashboard/Settings";
 import ListingWizard from "./pages/agent/ListingWizard";
 import ManageListings from "./pages/agent/ManageListings";
 import AgentInbox from "./pages/agent/AgentInbox";
+import SiteSEO from "./components/SiteSEO";
+import Analytics from "./components/Analytics";
 
 export default function App() {
   return (
@@ -49,6 +57,8 @@ export default function App() {
       <ToastProvider>
       <ConfirmProvider>
       <CompareProvider>
+      <SiteSEO />
+      <Analytics />
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
@@ -104,11 +114,52 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          {/* DeveloperDashboard deferred to v2 */}
+          <Route
+            path="dashboard/property-manager"
+            element={
+              <ProtectedRoute allow={["property_manager"]}>
+                <PropertyManagerDashboard />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="admin/dashboard"
             element={
               <ProtectedRoute allow={["admin"]}>
-                <AdminDashboard />
+                <AdminOverview />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="admin/dashboard/pending"
+            element={
+              <ProtectedRoute allow={["admin"]}>
+                <AdminPendingListings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="admin/dashboard/users"
+            element={
+              <ProtectedRoute allow={["admin"]}>
+                <AdminUsers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="admin/dashboard/reported"
+            element={
+              <ProtectedRoute allow={["admin"]}>
+                <AdminReported />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="admin/dashboard/support"
+            element={
+              <ProtectedRoute allow={["admin"]}>
+                <AdminSupport />
               </ProtectedRoute>
             }
           />

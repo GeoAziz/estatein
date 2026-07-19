@@ -7,15 +7,15 @@ import InquiryForm, { type FormField } from "../components/InquiryForm";
 import CTASection from "../components/CTASection";
 import SEO from "../components/SEO";
 import { apiClient } from "../lib/api-client";
-import { PROPERTIES } from "../data/properties";
+import type { Property } from "../data/properties";
 
-const LOCATION_OPTIONS = ["Any Location", "Malibu, California", "Downtown, New York", "Willow Creek, Vermont"];
-const PROPERTY_TYPE_OPTIONS = ["Any Type", "Villa", "Apartment", "Cottage"];
+const LOCATION_OPTIONS = ["Any Location", "Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret"];
+const PROPERTY_TYPE_OPTIONS = ["Any Type", "house", "apartment", "townhouse", "land", "villa"];
 const PRICE_RANGES: { label: string; minPrice?: number; maxPrice?: number }[] = [
   { label: "Any Price" },
-  { label: "Under $500,000", maxPrice: 500_000 },
-  { label: "$500,000 – $1,000,000", minPrice: 500_000, maxPrice: 1_000_000 },
-  { label: "Over $1,000,000", minPrice: 1_000_000 },
+  { label: "Under KSh 5M", maxPrice: 5_000_000 },
+  { label: "KSh 5M – KSh 20M", minPrice: 5_000_000, maxPrice: 20_000_000 },
+  { label: "Over KSh 20M", minPrice: 20_000_000 },
 ];
 
 const FORM_FIELDS: FormField[] = [
@@ -23,11 +23,11 @@ const FORM_FIELDS: FormField[] = [
   { name: "lastName", label: "Last Name", placeholder: "Enter Last Name" },
   { name: "email", label: "Email", placeholder: "Enter your Email", type: "email" },
   { name: "phone", label: "Phone", placeholder: "Enter Phone Number", type: "tel" },
-  { name: "location", label: "Preferred Location", placeholder: "Select Location", type: "select", options: ["Malibu, California", "Downtown, New York", "Willow Creek, Vermont"] },
-  { name: "propertyType", label: "Property Type", placeholder: "Select Property Type", type: "select", options: ["Villa", "Apartment", "Cottage"] },
+  { name: "location", label: "Preferred Location", placeholder: "Select Location", type: "select", options: ["Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret"] },
+  { name: "propertyType", label: "Property Type", placeholder: "Select Property Type", type: "select", options: ["house", "apartment", "townhouse", "land", "villa"] },
   { name: "bathrooms", label: "No. of Bathrooms", placeholder: "Select no. of Bathrooms", type: "select", options: ["1", "2", "3", "4+"] },
   { name: "bedrooms", label: "No. of Bedrooms", placeholder: "Select no. of Bedrooms", type: "select", options: ["1", "2", "3", "4+"] },
-  { name: "budget", label: "Budget", placeholder: "Select Budget", type: "select", options: ["Under $500,000", "$500,000 – $1,000,000", "Over $1,000,000"] },
+  { name: "budget", label: "Budget", placeholder: "Select Budget", type: "select", options: ["Under KSh 5M", "KSh 5M – KSh 20M", "Over KSh 20M"] },
   { name: "message", label: "Message", placeholder: "Enter your Message here..", type: "textarea", full: true },
 ];
 
@@ -37,7 +37,7 @@ export default function Properties() {
   const [propertyType, setPropertyType] = useState(PROPERTY_TYPE_OPTIONS[0]);
   const [priceRange, setPriceRange] = useState(PRICE_RANGES[0].label);
   const [loading, setLoading] = useState(true);
-  const [properties, setProperties] = useState(PROPERTIES);
+  const [properties, setProperties] = useState<Property[]>([]);
 
   const fetchProperties = useCallback(async (filters?: { location?: string; propertyType?: string; priceRange?: string }) => {
     setLoading(true);
@@ -55,32 +55,24 @@ export default function Properties() {
         limit: 50,
       });
       const items = Array.isArray(result) ? result : result?.properties || result?.data || [];
-      const anyFilterActive =
-        activeLocation !== LOCATION_OPTIONS[0] ||
-        activePropertyType !== PROPERTY_TYPE_OPTIONS[0] ||
-        activePriceRange !== PRICE_RANGES[0].label;
 
-      if (items.length || anyFilterActive) {
-        setProperties(items.map((p: any) => ({
-          slug: p.slug || p.id,
-          name: p.name || p.title,
-          location: p.city || p.location || "",
-          category: p.category || "",
-          price: p.price ? `$${Number(p.price).toLocaleString()}` : "Price TBD",
-          beds: p.bedrooms || p.beds || 0,
-          baths: p.bathrooms || p.baths || 0,
-          type: p.propertyType || p.type || "Property",
-          area: p.area || p.sqft ? `${p.sqft || p.area} sq ft` : "",
-          image: p.images?.[0] || p.image || "",
-          summary: p.description?.slice(0, 150) || "",
-          description: p.description || "",
-          features: p.features || [],
-        })));
-      } else {
-        setProperties(PROPERTIES);
-      }
+      setProperties(items.map((p: any) => ({
+        slug: p.slug || p.id,
+        name: p.name || p.title,
+        location: p.city || p.location || "",
+        category: p.category || "",
+        price: p.price ? `KSh ${Number(p.price).toLocaleString()}` : "Price TBD",
+        beds: p.bedrooms || p.beds || 0,
+        baths: p.bathrooms || p.baths || 0,
+        type: p.propertyType || p.type || "Property",
+        area: p.area || p.sqft ? `${p.sqft || p.area} sq ft` : "",
+        image: p.images?.[0] || p.image || "",
+        summary: p.description?.slice(0, 150) || "",
+        description: p.description || "",
+        features: p.features || [],
+      })));
     } catch {
-      setProperties(PROPERTIES);
+      setProperties([]);
     } finally {
       setLoading(false);
     }

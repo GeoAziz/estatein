@@ -14,9 +14,11 @@ import {
 } from "lucide-react";
 import DashboardLayout, { type NavItem } from "../../components/DashboardLayout";
 import { SkeletonRow, SkeletonStatCard } from "../../components/Skeleton";
+import AgentCalendar from "../../components/AgentCalendar";
 import { useAuth } from "../../lib/auth-api";
 import { apiClient } from "../../lib/api-client";
 import { mapInquiry, mapListing, unwrapList, type NormalizedInquiry, type NormalizedListing } from "../../lib/normalizers";
+import SEO from "../../components/SEO";
 
 const NAV: NavItem[] = [
   { label: "Dashboard", to: "/dashboard/agent", icon: LayoutDashboard, end: true },
@@ -39,10 +41,51 @@ type Inquiry = NormalizedInquiry;
 
 export default function AgentDashboard() {
   const { user } = useAuth();
-  const [, forceRerender] = useState(0);
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState<Listing[]>([]);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+  const [reschedulingId, setReschedulingId] = useState<string | null>(null);
+  const [rescheduleDate, setRescheduleDate] = useState("");
+  const [rescheduleTime, setRescheduleTime] = useState("");
+
+  async function handleConfirm(id: string) {
+    try {
+      await apiClient.updateViewingStatus(id, "confirmed");
+      setInquiries((prev) => prev.map((i) => (i.id === id ? { ...i, viewingStatus: "confirmed" } : i)));
+    } catch {
+      // Best-effort — dashboard state re-syncs on next fetch either way.
+    }
+  }
+
+  async function handleCancel(id: string) {
+    try {
+      await apiClient.updateViewingStatus(id, "cancelled");
+      setInquiries((prev) => prev.map((i) => (i.id === id ? { ...i, viewingStatus: "cancelled" } : i)));
+    } catch {
+      // Best-effort — dashboard state re-syncs on next fetch either way.
+    }
+  }
+
+  function startReschedule(id: string, currentDate?: string, currentTime?: string) {
+    setReschedulingId(id);
+    setRescheduleDate(currentDate ?? "");
+    setRescheduleTime(currentTime ?? "");
+  }
+
+  async function submitReschedule(id: string) {
+    if (!rescheduleDate || !rescheduleTime) return;
+    try {
+      await apiClient.rescheduleViewing(id, rescheduleDate, rescheduleTime);
+      setInquiries((prev) =>
+        prev.map((i) =>
+          i.id === id ? { ...i, viewingDate: rescheduleDate, viewingTime: rescheduleTime, viewingStatus: "requested" } : i
+        )
+      );
+      setReschedulingId(null);
+    } catch {
+      // Leave the inline form open so the agent can retry.
+    }
+  }
 
   const fetchData = useCallback(async () => {
     if (!user) return;
@@ -88,6 +131,7 @@ export default function AgentDashboard() {
 
   return (
     <DashboardLayout navItems={NAV}>
+      <SEO title="Agent Dashboard" description="Manage your listings, inquiries, scheduled viewings, and performance analytics from your Estatein agent dashboard." />
       <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-semibold text-white sm:text-3xl">Welcome, {user?.name?.split(" ")[0]}!</h1>
@@ -225,36 +269,97 @@ export default function AgentDashboard() {
             {scheduled.map((v) => {
               const listing = listings.find((l) => l.id === v.listingId);
               return (
-                <div key={v.id} className="flex flex-col gap-4 rounded-xl border border-border p-5 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="flex flex-col">
-                    <span className="text-base font-medium text-white">{listing?.name ?? "Property"}</span>
-                    <span className="text-sm text-muted">
-                      {v.buyerName} · {v.viewingDate} at {v.viewingTime} · {v.contactMethod}
-                    </span>
+                <div key={v.id} className="flex flex-col gap-4 rounded-xl border border-border p-5">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-base font-medium text-white">{listing?.name ?? "Property"}</span>
+                      <span className="text-sm text-muted">
+                        {v.buyerName} · {v.viewingDate} at {v.viewingTime} · {v.contactMethod}
+                        {v.viewingStatus && (
+                          <span className="ml-2 rounded-full border border-border px-2 py-0.5 text-xs capitalize">
+                            {v.viewingStatus}
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleConfirm(v.id)}
+                        disabled={v.viewingStatus === "confirmed"}
+                        className="rounded-[10px] border border-primary px-4 py-2.5 text-sm font-medium text-primary-text hover:bg-primary/10 disabled:cursor-not-allowed disabled:opacity-40"
+                      >
+                        Confirm
+                      </button>
+                      <button
+                        onClick={() => startReschedule(v.id, v.viewingDate, v.viewingTime)}
+                        className="rounded-[10px] border border-border px-4 py-2.5 text-sm font-medium text-white hover:border-primary hover:text-primary-text"
+                      >
+                        Reschedule
+                      </button>
+                      <button
+                        onClick={() => handleCancel(v.id)}
+                        disabled={v.viewingStatus === "cancelled"}
+                        className="rounded-[10px] border border-border px-4 py-2.5 text-sm font-medium text-muted hover:border-red-500 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-40"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => {
-                        apiClient.updateViewingStatus(v.id, "Confirmed").catch(() => {});
-                        forceRerender((n) => n + 1);
-                      }}
-                      className="rounded-[10px] border border-primary px-4 py-2.5 text-sm font-medium text-primary-text hover:bg-primary/10"
-                    >
-                      Confirm
-                    </button>
-                    <button className="rounded-[10px] border border-border px-4 py-2.5 text-sm font-medium text-white hover:border-primary hover:text-primary-text">
-                      Reschedule
-                    </button>
-                    <button className="rounded-[10px] border border-border px-4 py-2.5 text-sm font-medium text-muted hover:border-red-500 hover:text-red-400">
-                      Cancel
-                    </button>
-                  </div>
+
+                  {reschedulingId === v.id && (
+                    <div className="flex flex-col gap-3 rounded-lg border border-border bg-white/[0.02] p-4 sm:flex-row sm:items-end">
+                      <label className="flex flex-1 flex-col gap-1.5">
+                        <span className="text-xs text-muted">New date</span>
+                        <input
+                          type="date"
+                          value={rescheduleDate}
+                          onChange={(e) => setRescheduleDate(e.target.value)}
+                          className="h-11 rounded-lg border border-border bg-transparent px-3 text-sm text-white focus:border-primary focus:outline-none"
+                        />
+                      </label>
+                      <label className="flex flex-1 flex-col gap-1.5">
+                        <span className="text-xs text-muted">New time</span>
+                        <input
+                          type="text"
+                          placeholder="e.g. 2:00 PM"
+                          value={rescheduleTime}
+                          onChange={(e) => setRescheduleTime(e.target.value)}
+                          className="h-11 rounded-lg border border-border bg-transparent px-3 text-sm text-white placeholder:text-subtle focus:border-primary focus:outline-none"
+                        />
+                      </label>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => submitReschedule(v.id)}
+                          disabled={!rescheduleDate || !rescheduleTime}
+                          className="h-11 rounded-[10px] bg-primary px-4 text-sm font-medium text-white hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => setReschedulingId(null)}
+                          className="h-11 rounded-[10px] border border-border px-4 text-sm font-medium text-white hover:border-primary"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
         )}
       </div>
+
+      {/* Availability Calendar */}
+      {user?.agent?.id && (
+        <div id="availability" className="mt-12 scroll-mt-24">
+          <h2 className="text-xl font-semibold text-white sm:text-2xl">Manage Your Availability</h2>
+          <div className="mt-6">
+            <AgentCalendar agentId={user.agent.id} />
+          </div>
+        </div>
+      )}
 
       {/* Analytics */}
       <div id="analytics" className="mt-12 scroll-mt-24">

@@ -3,6 +3,7 @@ import { BedDouble, Building2, CalendarDays } from "lucide-react";
 import { PrimaryButton, Section, SectionHeading } from "../components/ui";
 import BlurImage from "../components/BlurImage";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 import { NEW_CONSTRUCTION_PROPERTIES } from "../data/listings";
 
 const BUILDERS = ["All Builders", ...new Set(NEW_CONSTRUCTION_PROPERTIES.map((p) => p.developer))];
@@ -16,6 +17,10 @@ export default function NewConstruction() {
 
   return (
     <>
+      <SEO
+        title="New Construction Homes"
+        description="Browse brand-new construction properties across Kenya with move-in dates, starting prices, and builder details, filterable by developer."
+      />
       <Section className="border-b border-border pt-12 lg:pt-16">
         <SectionHeading
           align="center"

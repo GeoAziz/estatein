@@ -3,6 +3,7 @@ import type { AuthRequest } from "../types/index.js";
 import prisma from "../config/database.js";
 import { NotFoundError } from "../utils/errors.js";
 import { sendSuccess, sendPaginated } from "../utils/response.js";
+import { trackEvent } from "../services/telemetry.js";
 
 export async function getFavorites(req: AuthRequest, res: Response, next: NextFunction) {
   try {
@@ -63,6 +64,7 @@ export async function addFavorite(req: AuthRequest, res: Response, next: NextFun
       data: { favorites: { increment: 1 } },
     });
 
+    trackEvent("favorite_added", req.user!.id, { propertyId }).catch(() => {});
     sendSuccess(res, { favorite }, 201, "Added to favorites");
   } catch (err) {
     next(err);

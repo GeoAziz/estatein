@@ -14,6 +14,7 @@ import BlurImage from "../../components/BlurImage";
 import { useAuth } from "../../lib/auth-api";
 import { apiClient } from "../../lib/api-client";
 import { mapInquiry, unwrapList, type NormalizedInquiry } from "../../lib/normalizers";
+import SEO from "../../components/SEO";
 
 const NAV: NavItem[] = [
   { label: "Dashboard", to: "/dashboard/buyer", icon: LayoutDashboard, end: true },
@@ -51,6 +52,9 @@ export default function BuyerDashboard() {
   const [favorites, setFavorites] = useState<FavoriteProperty[]>([]);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [savedSearches, setSavedSearches] = useState<SavedSearch[]>([]);
+  const [reschedulingId, setReschedulingId] = useState<string | null>(null);
+  const [rescheduleDate, setRescheduleDate] = useState("");
+  const [rescheduleTime, setRescheduleTime] = useState("");
 
   const fetchData = useCallback(async () => {
     if (!user) return;
@@ -113,8 +117,39 @@ export default function BuyerDashboard() {
     }
   }
 
+  async function handleCancelViewing(id: string) {
+    try {
+      await apiClient.updateViewingStatus(id, "cancelled");
+      setInquiries((prev) => prev.map((i) => (i.id === id ? { ...i, viewingStatus: "cancelled" } : i)));
+    } catch {
+      // Best-effort — dashboard state re-syncs on next fetch either way.
+    }
+  }
+
+  function startReschedule(id: string, currentDate?: string, currentTime?: string) {
+    setReschedulingId(id);
+    setRescheduleDate(currentDate ?? "");
+    setRescheduleTime(currentTime ?? "");
+  }
+
+  async function submitReschedule(id: string) {
+    if (!rescheduleDate || !rescheduleTime) return;
+    try {
+      await apiClient.rescheduleViewing(id, rescheduleDate, rescheduleTime);
+      setInquiries((prev) =>
+        prev.map((i) =>
+          i.id === id ? { ...i, viewingDate: rescheduleDate, viewingTime: rescheduleTime, viewingStatus: "requested" } : i
+        )
+      );
+      setReschedulingId(null);
+    } catch {
+      // Leave the inline form open so the buyer can retry.
+    }
+  }
+
   return (
     <DashboardLayout navItems={NAV}>
+      <SEO title="Buyer Dashboard" description="Manage your favorites, saved searches, inquiries, and scheduled viewings from your Estatein buyer dashboard." />
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-semibold text-white sm:text-3xl">Welcome back, {user?.name?.split(" ")[0]}!</h1>
         <p className="text-base text-muted">Here's what's happening with your properties.</p>
@@ -182,24 +217,79 @@ export default function BuyerDashboard() {
         ) : (
           <div className="mt-6 flex flex-col gap-4">
             {scheduled.map((v) => (
-              <div key={v.id} className="flex flex-col gap-4 rounded-xl border border-border p-6 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex items-center gap-4">
-                  {v.property?.image && (
-                    <img src={v.property.image} alt={v.property.name} className="h-16 w-16 shrink-0 rounded-lg object-cover" />
-                  )}
-                  <div className="flex flex-col">
-                    <span className="text-base font-semibold text-white">{v.property?.name ?? "Property"}</span>
-                    <span className="text-sm text-muted">{v.viewingDate} at {v.viewingTime}</span>
+              <div key={v.id} className="flex flex-col gap-4 rounded-xl border border-border p-6">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-center gap-4">
+                    {v.property?.image && (
+                      <img src={v.property.image} alt={v.property.name} className="h-16 w-16 shrink-0 rounded-lg object-cover" />
+                    )}
+                    <div className="flex flex-col">
+                      <span className="text-base font-semibold text-white">{v.property?.name ?? "Property"}</span>
+                      <span className="text-sm text-muted">
+                        {v.viewingDate} at {v.viewingTime}
+                        {v.viewingStatus && (
+                          <span className="ml-2 rounded-full border border-border px-2 py-0.5 text-xs capitalize">
+                            {v.viewingStatus}
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => startReschedule(v.id, v.viewingDate, v.viewingTime)}
+                      className="rounded-[10px] border border-border px-4 py-2.5 text-sm font-medium text-white hover:border-primary hover:text-primary-text"
+                    >
+                      Reschedule
+                    </button>
+                    <button
+                      onClick={() => handleCancelViewing(v.id)}
+                      disabled={v.viewingStatus === "cancelled"}
+                      className="rounded-[10px] border border-border px-4 py-2.5 text-sm font-medium text-muted hover:border-red-500 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      Cancel
+                    </button>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <button className="rounded-[10px] border border-border px-4 py-2.5 text-sm font-medium text-white hover:border-primary hover:text-primary-text">
-                    Reschedule
-                  </button>
-                  <button className="rounded-[10px] border border-border px-4 py-2.5 text-sm font-medium text-muted hover:border-red-500 hover:text-red-400">
-                    Cancel
-                  </button>
-                </div>
+
+                {reschedulingId === v.id && (
+                  <div className="flex flex-col gap-3 rounded-lg border border-border bg-white/[0.02] p-4 sm:flex-row sm:items-end">
+                    <label className="flex flex-1 flex-col gap-1.5">
+                      <span className="text-xs text-muted">New date</span>
+                      <input
+                        type="date"
+                        value={rescheduleDate}
+                        onChange={(e) => setRescheduleDate(e.target.value)}
+                        className="h-11 rounded-lg border border-border bg-transparent px-3 text-sm text-white focus:border-primary focus:outline-none"
+                      />
+                    </label>
+                    <label className="flex flex-1 flex-col gap-1.5">
+                      <span className="text-xs text-muted">New time</span>
+                      <input
+                        type="text"
+                        placeholder="e.g. 2:00 PM"
+                        value={rescheduleTime}
+                        onChange={(e) => setRescheduleTime(e.target.value)}
+                        className="h-11 rounded-lg border border-border bg-transparent px-3 text-sm text-white placeholder:text-subtle focus:border-primary focus:outline-none"
+                      />
+                    </label>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => submitReschedule(v.id)}
+                        disabled={!rescheduleDate || !rescheduleTime}
+                        className="h-11 rounded-[10px] bg-primary px-4 text-sm font-medium text-white hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-40"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setReschedulingId(null)}
+                        className="h-11 rounded-[10px] border border-border px-4 text-sm font-medium text-white hover:border-primary"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>

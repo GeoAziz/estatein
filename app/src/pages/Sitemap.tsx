@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Section, SectionHeading } from "../components/ui";
+import SEO from "../components/SEO";
 
 const SITE_MAP = [
   {
@@ -66,6 +67,10 @@ const SITE_MAP = [
 export default function Sitemap() {
   return (
     <>
+      <SEO
+        title="Sitemap"
+        description="A full sitemap of every page on Estatein, including property listings, guides, resources, and account pages, organized in one place."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading align="center" title="Sitemap" paragraph="Every page on Estatein, organized in one place." />
       </Section>

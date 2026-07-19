@@ -7,3 +7,5 @@ dist/
 .DS_Store
 serviceAccountKey.json
 firebase-key.json
+tsconfig.tsbuildinfo
+test-results/

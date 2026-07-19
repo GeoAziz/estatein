@@ -1,6 +1,6 @@
 import { useRef, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { AlertCircle, CheckCircle2, Loader2, X } from "lucide-react";
+import { AlertCircle, CheckCircle2, CreditCard, Loader2, X } from "lucide-react";
 import { useAuth } from "../lib/auth-api";
 import { apiClient } from "../lib/api-client";
 import { isValidKenyanPhone, MAX_MESSAGE_LENGTH } from "../lib/validation";
@@ -29,18 +29,24 @@ export default function InquiryModal({
   const [viewingTime, setViewingTime] = useState(TIME_SLOTS[0]);
   const [contactMethod, setContactMethod] = useState<(typeof CONTACT_METHODS)[number]>("Email");
   const [phone, setPhone] = useState(user?.phone ?? "");
-  const [touched, setTouched] = useState(false);
+  const [touchedFields, setTouchedFields] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [sent, setSent] = useState(false);
+
+  const [wantsDeposit, setWantsDeposit] = useState(false);
+  const [depositAmount, setDepositAmount] = useState(2000);
+  const [paymentInProgress, setPaymentInProgress] = useState(false);
+  const [paymentError, setPaymentError] = useState("");
+
   const dialogRef = useRef<HTMLDivElement>(null);
   useModalA11y(dialogRef, onClose);
 
   const today = new Date().toISOString().slice(0, 10);
-  const messageError = touched && !message.trim() ? "Message is required" : "";
-  const viewingDateError = touched && wantsViewing && !viewingDate ? "Select a date" : "";
+  const messageError = touchedFields && !message.trim() ? "Message is required" : "";
+  const viewingDateError = touchedFields && wantsViewing && !viewingDate ? "Select a date" : "";
   const phoneError =
-    touched && contactMethod !== "In-App Message" && phone && !isValidKenyanPhone(phone)
+    touchedFields && contactMethod !== "In-App Message" && phone && !isValidKenyanPhone(phone)
       ? "Enter a valid Kenyan phone number (e.g. 0712 345 678)"
       : "";
 
@@ -58,8 +64,9 @@ export default function InquiryModal({
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setTouched(true);
+    setTouchedFields(true);
     setSubmitError("");
+    setPaymentError("");
     if (!user || !isValid) return;
 
     if (contactMethod === "WhatsApp") {
@@ -77,6 +84,28 @@ export default function InquiryModal({
         contactMethod,
         phone: phone || undefined,
       });
+
+      // Initiate payment in the background if selected (don't block on it)
+      if (wantsDeposit && contactMethod !== "In-App Message") {
+        setPaymentInProgress(true);
+        apiClient
+          .initiatePayment(
+            depositAmount,
+            "mpesa",
+            phone.startsWith("0") ? phone : `0${phone}`,
+            `Viewing deposit for ${propertyName}`
+          )
+          .then(() => {
+            showToast("success", "M-Pesa prompt sent. Enter your PIN to secure the viewing.");
+          })
+          .catch((err: any) => {
+            setPaymentError(`Deposit payment failed: ${err.message}. You can pay later.`);
+          })
+          .finally(() => {
+            setPaymentInProgress(false);
+          });
+      }
+
       setSubmitting(false);
       setSent(true);
       showToast("success", "Inquiry sent successfully");
@@ -117,9 +146,27 @@ export default function InquiryModal({
         {sent ? (
           <div className="flex flex-col items-center gap-4 py-6 text-center">
             <CheckCircle2 className="text-primary-text" size={44} />
-            <p className="text-base text-muted">
-              The agent will be in touch shortly. You can track your inquiry status in your dashboard.
-            </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-base text-white font-medium">Inquiry sent successfully!</p>
+              <p className="text-sm text-muted">
+                The agent will be in touch shortly. You can track your inquiry status in your dashboard.
+              </p>
+              {wantsDeposit && (
+                <div className={`mt-2 rounded-lg border px-3 py-2 text-xs ${
+                  paymentInProgress
+                    ? "border-amber-500/40 bg-amber-500/10 text-amber-400"
+                    : paymentError
+                      ? "border-red-500/40 bg-red-500/10 text-red-400"
+                      : "border-emerald-500/40 bg-emerald-500/10 text-emerald-400"
+                }`}>
+                  {paymentInProgress
+                    ? "M-Pesa prompt sent. Complete the payment on your phone."
+                    : paymentError
+                      ? `Payment issue: ${paymentError}`
+                      : "Deposit payment confirmed. Viewing is secured."}
+                </div>
+              )}
+            </div>
             <button onClick={onClose} className="rounded-[10px] bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary/90">
               Close
             </button>
@@ -145,6 +192,13 @@ export default function InquiryModal({
               </div>
             )}
 
+            {paymentError && (
+              <div role="alert" className="flex items-start gap-2 rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-400">
+                <AlertCircle size={16} className="mt-0.5 shrink-0" />
+                {paymentError}
+              </div>
+            )}
+
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <label className="flex flex-col gap-1.5">
                 <span className="text-sm text-muted">Full Name</span>
@@ -166,7 +220,7 @@ export default function InquiryModal({
                   <input
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    onBlur={() => setTouched(true)}
+                    onBlur={() => setTouchedFields(true)}
                     type="tel"
                     inputMode="tel"
                     placeholder="712 345 678"
@@ -194,7 +248,7 @@ export default function InquiryModal({
                 required
                 value={message}
                 onChange={(e) => setMessage(e.target.value.slice(0, MAX_MESSAGE_LENGTH))}
-                onBlur={() => setTouched(true)}
+                onBlur={() => setTouchedFields(true)}
                 rows={3}
                 aria-invalid={Boolean(messageError)}
                 aria-required="true"
@@ -217,37 +271,77 @@ export default function InquiryModal({
             </label>
 
             {wantsViewing && (
-              <div className="grid grid-cols-1 gap-4 rounded-lg border border-border p-4 sm:grid-cols-2">
-                <label className="flex flex-col gap-1.5">
-                  <span className="text-sm text-muted">Date</span>
+              <div className="flex flex-col gap-4">
+                <div className="grid grid-cols-1 gap-4 rounded-lg border border-border p-4 sm:grid-cols-2">
+                  <label className="flex flex-col gap-1.5">
+                    <span className="text-sm text-muted">Date</span>
+                    <input
+                      type="date"
+                      min={today}
+                      required={wantsViewing}
+                      value={viewingDate}
+                      onChange={(e) => setViewingDate(e.target.value)}
+                      onBlur={() => setTouchedFields(true)}
+                      aria-invalid={Boolean(viewingDateError)}
+                      className={`h-11 rounded-lg border bg-transparent px-4 text-sm text-white focus:outline-none ${
+                        viewingDateError ? "border-red-500" : "border-border focus:border-primary"
+                      }`}
+                    />
+                    {viewingDateError && <span className="text-xs text-red-400">{viewingDateError}</span>}
+                  </label>
+                  <label className="flex flex-col gap-1.5">
+                    <span className="text-sm text-muted">Time</span>
+                    <select
+                      value={viewingTime}
+                      onChange={(e) => setViewingTime(e.target.value)}
+                      className="h-11 rounded-lg border border-border bg-transparent px-4 text-sm text-white focus:outline-none"
+                    >
+                      {TIME_SLOTS.map((t) => (
+                        <option key={t} value={t} className="bg-base text-white">
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+
+                <label className="flex min-h-[44px] items-center gap-2.5 rounded-lg border border-border p-4 text-sm text-white">
                   <input
-                    type="date"
-                    min={today}
-                    required={wantsViewing}
-                    value={viewingDate}
-                    onChange={(e) => setViewingDate(e.target.value)}
-                    onBlur={() => setTouched(true)}
-                    aria-invalid={Boolean(viewingDateError)}
-                    className={`h-11 rounded-lg border bg-transparent px-4 text-sm text-white focus:outline-none ${
-                      viewingDateError ? "border-red-500" : "border-border focus:border-primary"
-                    }`}
+                    type="checkbox"
+                    checked={wantsDeposit}
+                    onChange={(e) => setWantsDeposit(e.target.checked)}
+                    className="h-5 w-5 rounded border-border bg-transparent accent-primary"
                   />
-                  {viewingDateError && <span className="text-xs text-red-400">{viewingDateError}</span>}
+                  <div className="flex flex-col gap-0.5">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <CreditCard size={16} className="text-primary-text" />
+                      Secure with M-Pesa deposit
+                    </span>
+                    <span className="text-xs text-muted">Shows the agent you're serious. Refundable if deal doesn't go through.</span>
+                  </div>
                 </label>
-                <label className="flex flex-col gap-1.5">
-                  <span className="text-sm text-muted">Time</span>
-                  <select
-                    value={viewingTime}
-                    onChange={(e) => setViewingTime(e.target.value)}
-                    className="h-11 rounded-lg border border-border bg-transparent px-4 text-sm text-white focus:outline-none"
-                  >
-                    {TIME_SLOTS.map((t) => (
-                      <option key={t} value={t} className="bg-base text-white">
-                        {t}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+
+                {wantsDeposit && (
+                  <label className="flex flex-col gap-2">
+                    <span className="text-sm font-medium text-white">Deposit Amount</span>
+                    <div className="flex gap-2">
+                      {[1000, 2000, 5000].map((amt) => (
+                        <button
+                          key={amt}
+                          type="button"
+                          onClick={() => setDepositAmount(amt)}
+                          className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium transition ${
+                            depositAmount === amt
+                              ? "border-primary bg-primary/10 text-primary-text"
+                              : "border-border text-muted hover:border-primary hover:text-white"
+                          }`}
+                        >
+                          KSh {amt.toLocaleString()}
+                        </button>
+                      ))}
+                    </div>
+                  </label>
+                )}
               </div>
             )}
 
@@ -283,17 +377,18 @@ export default function InquiryModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 rounded-[10px] border border-border py-3 text-base font-medium text-white hover:border-primary hover:text-primary-text"
+                disabled={submitting || paymentInProgress}
+                className="flex-1 rounded-[10px] border border-border py-3 text-base font-medium text-white hover:border-primary hover:text-primary-text disabled:opacity-40"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                disabled={!isValid || submitting}
+                disabled={!isValid || submitting || paymentInProgress}
                 className="flex flex-1 items-center justify-center gap-2 rounded-[10px] bg-primary py-3 text-base font-medium text-white hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-40"
               >
-                {submitting && <Loader2 size={16} className="animate-spin" />}
-                {submitting ? "Sending…" : "Send Inquiry"}
+                {paymentInProgress && <Loader2 size={16} className="animate-spin" />}
+                {paymentInProgress ? "Processing payment…" : submitting ? "Sending…" : "Send Inquiry"}
               </button>
             </div>
           </form>

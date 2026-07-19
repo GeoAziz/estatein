@@ -15,6 +15,7 @@ import { useToast } from "../../lib/toast";
 import { useConfirm } from "../../lib/confirm";
 import { apiClient } from "../../lib/api-client";
 import Confetti from "../../components/Confetti";
+import SEO from "../../components/SEO";
 
 const MAX_PHOTO_MB = 5;
 const MAX_PHOTOS = 10;
@@ -304,6 +305,7 @@ export default function ListingWizard() {
   if (published) {
     return (
       <DashboardLayout navItems={NAV}>
+        <SEO title={isEdit ? "Listing Updated" : "Listing Published"} description="Your property listing has been submitted to Estatein." />
         <div className="relative mx-auto flex max-w-lg flex-col items-center gap-4 overflow-hidden rounded-xl border border-border p-10 text-center">
           {!isEdit && <Confetti />}
           <CheckCircle2 className="text-primary-text" size={48} />
@@ -348,6 +350,7 @@ export default function ListingWizard() {
 
   return (
     <DashboardLayout navItems={NAV}>
+      <SEO title={isEdit ? "Edit Listing" : "Add New Property"} description="Create or edit a property listing on Estatein, including photos, pricing, and features." />
       <h1 className="text-2xl font-semibold text-white sm:text-3xl">
         {isEdit ? "Edit Your Listing" : "Add New Property"}
       </h1>

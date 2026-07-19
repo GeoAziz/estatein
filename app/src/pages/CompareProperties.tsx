@@ -3,6 +3,7 @@ import { Bath, BedDouble } from "lucide-react";
 import { Section, SectionHeading, PrimaryButton, SecondaryButton } from "../components/ui";
 import BlurImage from "../components/BlurImage";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 import { PROPERTIES } from "../data/properties";
 
 type CompareField = {
@@ -56,21 +57,31 @@ export default function CompareProperties() {
 
   if (properties.length < 2) {
     return (
-      <Section className="pt-12 lg:pt-16">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <SectionHeading
-            align="center"
-            title="Compare Properties"
-            paragraph="Select at least two properties to compare them side by side."
-          />
-          <SecondaryButton to="/properties">Browse Properties</SecondaryButton>
-        </div>
-      </Section>
+      <>
+        <SEO
+          title="Compare Properties"
+          description="Compare properties side by side on price, bedrooms, bathrooms, area, location, and features to help you choose the right home."
+        />
+        <Section className="pt-12 lg:pt-16">
+          <div className="flex flex-col items-center gap-6 text-center">
+            <SectionHeading
+              align="center"
+              title="Compare Properties"
+              paragraph="Select at least two properties to compare them side by side."
+            />
+            <SecondaryButton to="/properties">Browse Properties</SecondaryButton>
+          </div>
+        </Section>
+      </>
     );
   }
 
   return (
     <>
+      <SEO
+        title="Compare Properties"
+        description="Compare properties side by side on price, bedrooms, bathrooms, area, location, and features to help you choose the right home."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           title="Compare Properties"

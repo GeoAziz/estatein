@@ -35,10 +35,24 @@ export const prismaMock = {
   analyticsEvent: model(),
   notification: model(),
   activityLog: model(),
+  otpCode: model(),
+  agentAvailabilitySlot: model(),
+  twoFactorBackupCode: model(),
+  school: model(),
+  neighborhood: model(),
+  estate: model(),
+  payment: model(),
+  $transaction: vi.fn(),
 };
 
 export function resetPrismaMock() {
-  for (const m of Object.values(prismaMock)) {
+  for (const [key, m] of Object.entries(prismaMock)) {
+    if (key === "$transaction") {
+      (m as ReturnType<typeof vi.fn>).mockReset();
+      // Default: run the transaction callback against the same mock client.
+      (m as ReturnType<typeof vi.fn>).mockImplementation((cb: any) => cb(prismaMock));
+      continue;
+    }
     for (const fn of Object.values(m)) {
       (fn as ReturnType<typeof vi.fn>).mockReset();
     }

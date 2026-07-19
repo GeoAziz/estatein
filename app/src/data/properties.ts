@@ -16,6 +16,8 @@ export type Property = {
   summary: string;
   description: string;
   features: string[];
+  lat?: number;
+  lng?: number;
 };
 
 export const PROPERTIES: Property[] = [

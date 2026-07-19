@@ -1,5 +1,6 @@
 import { GuideToc, type AccordionSection } from "../components/Accordion";
 import { Section, SectionHeading } from "../components/ui";
+import SEO from "../components/SEO";
 
 const SECTIONS: AccordionSection[] = [
   {
@@ -59,6 +60,10 @@ const SECTIONS: AccordionSection[] = [
 export default function Terms() {
   return (
     <>
+      <SEO
+        title="Terms of Service"
+        description="Read the terms and conditions governing your use of the Estatein website, property listings, and real estate services."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           eyebrow="Effective Date: June 1, 2026"

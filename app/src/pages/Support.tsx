@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Mail, MessageCircle, Phone, Search, Star } from "lucide-react";
 import { FaqCard } from "../components/Faq";
 import { PrimaryButton, Section, SectionHeading } from "../components/ui";
+import SEO from "../components/SEO";
 import { SUPPORT_FAQS } from "../data/content";
 
 const CONTACT_METHODS = [
@@ -27,6 +28,10 @@ export default function Support() {
 
   return (
     <>
+      <SEO
+        title="Support Center"
+        description="Get help with your Estatein account, listings, or bookings. Search FAQs or contact our support team by email, phone, or chat."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           align="center"

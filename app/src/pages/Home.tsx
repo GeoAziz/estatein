@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Quote } from "lucide-react";
 import { PrimaryButton, SecondaryButton, Section, SectionHeading } from "../components/ui";
 import ServiceHubBar from "../components/ServiceHubBar";
@@ -5,7 +6,7 @@ import PropertyCard from "../components/PropertyCard";
 import { FaqCard } from "../components/Faq";
 import CTASection from "../components/CTASection";
 import SEO from "../components/SEO";
-import { PROPERTIES } from "../data/properties";
+import { apiClient } from "../lib/api-client";
 import { HOME_FAQS, TESTIMONIALS } from "../data/content";
 import heroLifestyle from "../assets/img/hero-lifestyle.jpg";
 
@@ -16,6 +17,20 @@ const STATS = [
 ];
 
 export default function Home() {
+  const [featured, setFeatured] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    apiClient
+      .getProperties({ limit: 6, sortBy: "views" })
+      .then((res) => {
+        const properties = res?.properties || res?.data || [];
+        setFeatured(Array.isArray(properties) ? properties.slice(0, 6) : []);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <>
       <SEO
@@ -75,9 +90,17 @@ export default function Home() {
           </SecondaryButton>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {PROPERTIES.map((property) => (
-            <PropertyCard key={property.slug} property={property} />
-          ))}
+          {loading
+            ? Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="animate-pulse rounded-xl border border-border bg-white/5 p-4">
+                  <div className="h-48 w-full rounded-lg bg-white/10" />
+                  <div className="mt-4 h-4 w-3/4 rounded bg-white/10" />
+                  <div className="mt-2 h-4 w-1/2 rounded bg-white/10" />
+                </div>
+              ))
+            : featured.map((property: any) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
         </div>
       </Section>
 

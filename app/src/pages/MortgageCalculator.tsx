@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { PrimaryButton, Section, SectionHeading } from "../components/ui";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 
 const TIPS = [
   { title: "Improve Your Credit Score", description: "A higher credit score typically unlocks lower interest rates, which can save you thousands over the life of your loan." },
@@ -38,6 +39,10 @@ export default function MortgageCalculator() {
 
   return (
     <>
+      <SEO
+        title="Mortgage Calculator"
+        description="Estimate your monthly mortgage payment based on home price, down payment, interest rate, and loan term with Estatein's free mortgage calculator."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           align="center"

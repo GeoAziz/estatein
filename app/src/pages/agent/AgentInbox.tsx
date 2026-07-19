@@ -20,6 +20,7 @@ import { useConfirm } from "../../lib/confirm";
 import { timeAgo, MAX_REPLY_LENGTH } from "../../lib/validation";
 import { apiClient } from "../../lib/api-client";
 import { mapInquiry, unwrapList, type NormalizedInquiry } from "../../lib/normalizers";
+import SEO from "../../components/SEO";
 
 type Inquiry = NormalizedInquiry & {
   thread: { sender: "buyer" | "agent"; text: string; at: string }[];
@@ -168,6 +169,7 @@ export default function AgentInbox() {
   if (!loading && inquiries.length === 0) {
     return (
       <DashboardLayout navItems={nav}>
+        <SEO title="Messages" description="View and respond to buyer inquiries about your property listings on Estatein." />
         <div className="mx-auto mt-16 flex max-w-md flex-col items-center gap-4 rounded-xl border border-border p-12 text-center">
           <MessageSquare className="text-subtle" size={48} />
           <h2 className="text-xl font-semibold text-white">No messages yet</h2>
@@ -179,6 +181,7 @@ export default function AgentInbox() {
 
   return (
     <DashboardLayout navItems={nav}>
+      <SEO title="Messages" description="View and respond to buyer inquiries about your property listings on Estatein." />
       <h1 className="text-2xl font-semibold text-white sm:text-3xl">Messages</h1>
 
       <div className="mt-6 grid grid-cols-1 gap-0 overflow-hidden rounded-xl border border-border lg:grid-cols-[340px_1fr]">

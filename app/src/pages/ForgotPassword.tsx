@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { Mail, MailCheck, Sparkles } from "lucide-react";
+import SEO from "../components/SEO";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="flex min-h-[calc(100vh-73px)] items-center justify-center bg-base px-6 py-16">
+      <SEO title="Forgot Password" description="Reset your Estatein account password by entering your email address to receive a reset link." />
       <div className="flex w-full max-w-md flex-col gap-8">
         <div className="flex flex-col items-center gap-6 text-center">
           <Link to="/" className="flex items-center gap-2 text-xl font-semibold text-white">

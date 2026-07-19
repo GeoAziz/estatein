@@ -2,6 +2,7 @@ import { Download } from "lucide-react";
 import { AccordionItem, GuideToc, type AccordionSection } from "../components/Accordion";
 import { PrimaryButton, Section, SectionHeading } from "../components/ui";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 
 const SECTIONS: AccordionSection[] = [
   {
@@ -54,6 +55,10 @@ const SECTIONS: AccordionSection[] = [
 export default function SellingGuide() {
   return (
     <>
+      <SEO
+        title="Home Selling Guide"
+        description="Prepare, price, market, and close the sale of your home with our step-by-step selling guide covering staging, pricing strategy, and negotiations."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           align="center"

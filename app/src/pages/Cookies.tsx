@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Section, SectionHeading } from "../components/ui";
+import SEO from "../components/SEO";
 
 function Toggle({ label, description, defaultOn = true, locked = false }: { label: string; description: string; defaultOn?: boolean; locked?: boolean }) {
   const [on, setOn] = useState(defaultOn);
@@ -41,6 +42,10 @@ const SECTIONS = [
 export default function Cookies() {
   return (
     <>
+      <SEO
+        title="Cookie Policy"
+        description="Learn how Estatein uses cookies and similar technologies, and how you can manage your cookie preferences."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           align="center"

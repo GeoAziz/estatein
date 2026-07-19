@@ -4,6 +4,8 @@ import prisma from "../config/database.js";
 import { NotFoundError } from "../utils/errors.js";
 import { sendSuccess, sendPaginated } from "../utils/response.js";
 import { searchProperties } from "../services/search.js";
+import { computeValuation } from "../services/valuation.js";
+import { trackEvent } from "../services/telemetry.js";
 
 export async function getProperties(req: AuthRequest, res: Response, next: NextFunction) {
   try {
@@ -29,7 +31,6 @@ export async function getPropertyById(req: AuthRequest, res: Response, next: Nex
 
     if (!property) throw new NotFoundError("Property not found");
 
-    // Increment views
     await prisma.property.update({
       where: { id },
       data: { views: { increment: 1 } },
@@ -76,9 +77,10 @@ export async function incrementViews(req: AuthRequest, res: Response, next: Next
     const property = await prisma.property.update({
       where: { id },
       data: { views: { increment: 1 } },
-      select: { id: true, views: true },
+      select: { id: true, views: true, county: true },
     });
 
+    trackEvent("property_viewed", req.user?.id, { propertyId: id, county: property.county }).catch(() => {});
     sendSuccess(res, { views: property.views });
   } catch (err) {
     next(err);
@@ -116,14 +118,17 @@ export async function getPriceHistory(req: AuthRequest, res: Response, next: Nex
     const id = String(req.params.id);
     const property = await prisma.property.findUnique({
       where: { id },
-      select: { id: true, priceHistory: true, price: true },
+      select: { id: true, priceHistory: true, price: true, createdAt: true, city: true },
     });
 
     if (!property) throw new NotFoundError("Property not found");
 
-    sendSuccess(res, {
-      priceHistory: property.priceHistory || [{ date: new Date().toISOString(), price: property.price }],
-    });
+    // Use stored priceHistory or compute from property data
+    const history = property.priceHistory || [
+      { date: property.createdAt.toISOString(), price: property.price },
+    ];
+
+    sendSuccess(res, { priceHistory: history });
   } catch (err) {
     next(err);
   }
@@ -132,17 +137,10 @@ export async function getPriceHistory(req: AuthRequest, res: Response, next: Nex
 export async function getZestimate(req: AuthRequest, res: Response, next: NextFunction) {
   try {
     const id = String(req.params.id);
-    const property = await prisma.property.findUnique({ where: { id } });
-    if (!property) throw new NotFoundError("Property not found");
+    const valuation = await computeValuation(id);
+    if (!valuation) throw new NotFoundError("Property not found");
 
-    // Simple zestimate based on property price ± 5%
-    const zestimate = property.zestimate || property.price;
-    const range = {
-      low: Math.round(zestimate * 0.95),
-      high: Math.round(zestimate * 1.05),
-    };
-
-    sendSuccess(res, { zestimate, range });
+    sendSuccess(res, valuation);
   } catch (err) {
     next(err);
   }

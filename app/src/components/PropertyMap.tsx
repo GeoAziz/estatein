@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Loader } from "@googlemaps/js-api-loader";
 
 declare global {
   interface Window {
@@ -14,7 +15,12 @@ type Marker = {
   slug?: string;
 };
 
-const MAP_STYLE = [
+type Point = {
+  lat: number;
+  lng: number;
+};
+
+const MAP_STYLE: any[] = [
   { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
   { elementType: "labels.text.stroke", stylers: [{ color: "#141414" }] },
   { elementType: "labels.text.fill", stylers: [{ color: "#999999" }] },
@@ -56,30 +62,47 @@ function addMarker(m: Marker, map: any, onClick?: (slug: string) => void) {
   return marker;
 }
 
+interface PropertyMapProps {
+  markers: Marker[];
+  center?: Point;
+  zoom?: number;
+  className?: string;
+  onMarkerClick?: (slug: string) => void;
+  drawingMode?: boolean;
+  onPolygonComplete?: (polygon: Point[]) => void;
+}
+
 export default function PropertyMap({
   markers,
   center = { lat: -1.2921, lng: 36.8219 },
   zoom = 12,
   className = "",
   onMarkerClick,
-}: {
-  markers: Marker[];
-  center?: { lat: number; lng: number };
-  zoom?: number;
-  className?: string;
-  onMarkerClick?: (slug: string) => void;
-}) {
+  drawingMode = false,
+  onPolygonComplete,
+}: PropertyMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const instanceRef = useRef<any>(null);
+  const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
+  const drawingManagerRef = useRef<any>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const onClickRef = useRef(onMarkerClick);
   onClickRef.current = onMarkerClick;
 
+  // Initialize Google Maps
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!mapRef.current || isLoaded) return;
 
-    function initMap() {
-      if (!mapRef.current || !window.google?.maps) return;
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+    const loader = new Loader({
+      apiKey,
+      version: "weekly",
+      libraries: drawingMode ? ["drawing", "geometry"] : [],
+    });
+
+    loader.load().then(() => {
+      if (!mapRef.current) return;
 
       const map = new window.google.maps.Map(mapRef.current, {
         center,
@@ -91,34 +114,65 @@ export default function PropertyMap({
         fullscreenControl: true,
         styles: MAP_STYLE,
       });
-      instanceRef.current = map;
-      markersRef.current = markers.map((m) => addMarker(m, map, onClickRef.current));
-    }
 
-    if (window.google?.maps) {
-      initMap();
-      return;
-    }
+      mapInstanceRef.current = map;
 
-    const script = document.createElement("script");
-    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDemo1234567890";
-    script.async = true;
-    script.defer = true;
-    script.onload = initMap;
-    document.head.appendChild(script);
+      // Initialize drawing mode if enabled
+      if (drawingMode) {
+        const drawingManager = new window.google.maps.drawing.DrawingManager({
+          drawingMode: window.google.maps.drawing.OverlayType.POLYGON,
+          drawingControl: true,
+          drawingControlOptions: {
+            position: window.google.maps.ControlPosition.TOP_CENTER,
+            drawingModes: [window.google.maps.drawing.OverlayType.POLYGON],
+          },
+          polygonOptions: {
+            fillColor: "#703bf7",
+            fillOpacity: 0.2,
+            strokeColor: "#703bf7",
+            strokeWeight: 2,
+            editable: true,
+          },
+        });
+        drawingManager.setMap(map);
+        drawingManagerRef.current = drawingManager;
+
+        // Handle polygon completion
+        window.google.maps.event.addListener(drawingManager, "polygoncomplete", (polygon: any) => {
+          const path = polygon.getPath();
+          const coordinates: Point[] = [];
+          path.forEach((latLng: any) => {
+            coordinates.push({ lat: latLng.lat(), lng: latLng.lng() });
+          });
+          if (onPolygonComplete) {
+            onPolygonComplete(coordinates);
+          }
+          // Disable drawing after completing a polygon
+          drawingManager.setDrawingMode(null);
+        });
+      }
+
+      setIsLoaded(true);
+    });
 
     return () => {
-      markersRef.current.forEach((m) => m.setMap(null));
-      markersRef.current = [];
+      if (mapInstanceRef.current) {
+        window.google.maps.event.clearInstanceListeners(mapInstanceRef.current);
+      }
     };
+    // Map instantiation should only run once on mount (or when drawingMode
+    // toggles) — center/zoom changes are intentionally not re-triggering a
+    // full re-init here, matching the original single-init behavior.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [drawingMode, isLoaded]);
 
+  // Update markers
   useEffect(() => {
-    if (!instanceRef.current || !window.google?.maps) return;
+    if (!mapInstanceRef.current || !isLoaded) return;
+
     markersRef.current.forEach((m) => m.setMap(null));
-    markersRef.current = markers.map((m) => addMarker(m, instanceRef.current, onClickRef.current));
-  }, [markers]);
+    markersRef.current = markers.map((m) => addMarker(m, mapInstanceRef.current!, onClickRef.current));
+  }, [markers, isLoaded]);
 
   return (
     <div

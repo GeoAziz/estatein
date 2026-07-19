@@ -2,6 +2,7 @@ import { AccordionItem, GuideToc, type AccordionSection } from "../components/Ac
 import { FaqCard } from "../components/Faq";
 import { PrimaryButton, Section, SectionHeading } from "../components/ui";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 
 const SECTIONS: AccordionSection[] = [
   {
@@ -60,6 +61,10 @@ const FAQS = [
 export default function BuyingGuide() {
   return (
     <>
+      <SEO
+        title="Home Buying Guide"
+        description="A step-by-step guide to buying a home, from mortgage pre-approval and house hunting to making an offer, inspections, and closing day."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           align="center"

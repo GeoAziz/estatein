@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { Section, SectionHeading } from "../components/ui";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 import { BLOG_CATEGORIES, BLOG_POSTS, FEATURED_BLOG_POST } from "../data/content";
 import heroLifestyle from "../assets/img/hero-lifestyle.jpg";
 
@@ -20,6 +21,10 @@ export default function Blog() {
 
   return (
     <>
+      <SEO
+        title="Blog"
+        description="Real estate insights, market tips, and expert advice from the Estatein team to help you buy, sell, or rent with confidence."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading align="center" title="Estatein Blog" paragraph="Real estate insights & tips from our team of experts." />
         <div className="mx-auto mt-8 flex max-w-xl items-center gap-3 rounded-xl border border-border px-5 py-4">

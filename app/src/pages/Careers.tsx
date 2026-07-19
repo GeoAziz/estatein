@@ -1,6 +1,7 @@
 import { Rocket, ShieldCheck, Sparkles } from "lucide-react";
 import { PrimaryButton, Section, SectionHeading } from "../components/ui";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 import { CULTURE_BENEFITS, JOBS, WHY_JOIN } from "../data/content";
 import team1 from "../assets/img/team-1.jpg";
 import team2 from "../assets/img/team-2.jpg";
@@ -20,6 +21,10 @@ const TEAM_PHOTOS = [team1, team2, team3, team4];
 export default function Careers() {
   return (
     <>
+      <SEO
+        title="Careers"
+        description="Join the Estatein team. Explore open roles, our company culture, and what it's like to work at a fast-growing real estate technology company."
+      />
       <Section className="pt-12 lg:pt-16">
         <SectionHeading
           align="center"

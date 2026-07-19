@@ -1,105 +1,229 @@
-import { LayoutDashboard, Eye, Heart, MessageSquare, TrendingUp } from "lucide-react";
-import DashboardLayout, { type NavItem } from "../../components/DashboardLayout";
+import { useCallback, useEffect, useState } from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
+import { Building2, Download, MessageSquare, TrendingUp, Users } from "lucide-react";
+import DashboardLayout from "../../components/DashboardLayout";
+import { SkeletonStatCard } from "../../components/Skeleton";
+import { apiClient } from "../../lib/api-client";
+import { ADMIN_NAV } from "../../lib/admin-nav";
+import SEO from "../../components/SEO";
 
-const NAV: NavItem[] = [
-  { label: "Overview", to: "/dashboard/admin", icon: LayoutDashboard, end: true },
-  { label: "Analytics", to: "/dashboard/admin/analytics", icon: TrendingUp },
-];
+type Tab = "Overview" | "Regional";
 
-const STATS = [
-  { label: "Total Views", value: "12,847", icon: Eye, accent: "text-primary-text" },
-  { label: "Favorites", value: "1,203", icon: Heart, accent: "text-rose-400" },
-  { label: "Inquiries", value: "386", icon: MessageSquare, accent: "text-emerald-400" },
-  { label: "Conversion Rate", value: "3.2%", icon: TrendingUp, accent: "text-amber-400" },
-];
+const CHART_COLORS = ["#703bf7", "#3b82f6", "#10b981", "#f59e0b", "#f43f5e", "#8b5cf6"];
 
-const BAR_DATA = [
-  { label: "Seaside Serenity Villa", views: 4250, color: "bg-primary" },
-  { label: "Metropolitan Haven", views: 3180, color: "bg-blue-500" },
-  { label: "Rustic Retreat Cottage", views: 2417, color: "bg-emerald-500" },
-  { label: "Mountain View Lodge", views: 1890, color: "bg-amber-500" },
-  { label: "Lakeside Retreat", views: 1110, color: "bg-rose-500" },
-];
+interface Overview {
+  totalListings: number;
+  activeListings: number;
+  totalInquiries: number;
+  totalUsers: number;
+  totalRevenue: number;
+  monthlyActiveUsers: number;
+}
 
-const MAX_VIEWS = Math.max(...BAR_DATA.map((d) => d.views));
-
-const MONTHLY = [
-  { label: "Jan", value: 820 },
-  { label: "Feb", value: 910 },
-  { label: "Mar", value: 1340 },
-  { label: "Apr", value: 1120 },
-  { label: "May", value: 1560 },
-  { label: "Jun", value: 1480 },
-  { label: "Jul", value: 1890 },
-  { label: "Aug", value: 2100 },
-  { label: "Sep", value: 1760 },
-  { label: "Oct", value: 1420 },
-  { label: "Nov", value: 1280 },
-  { label: "Dec", value: 1620 },
-];
-
-const MAX_MONTHLY = Math.max(...MONTHLY.map((m) => m.value));
+interface RegionalRow {
+  county: string;
+  propertyCount: number;
+  avgPrice: number;
+  inquiryCount: number;
+}
 
 export default function AnalyticsDashboard() {
+  const [tab, setTab] = useState<Tab>("Overview");
+  const [overview, setOverview] = useState<Overview | null>(null);
+  const [regional, setRegional] = useState<RegionalRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [exporting, setExporting] = useState(false);
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const [overviewResult, regionalResult] = await Promise.allSettled([
+        apiClient.getAnalyticsOverview(),
+        apiClient.getRegionalTrends(),
+      ]);
+
+      if (overviewResult.status === "fulfilled") {
+        setOverview(overviewResult.value);
+      }
+      if (regionalResult.status === "fulfilled") {
+        setRegional(regionalResult.value?.regions || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch analytics:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  async function handleExport() {
+    setExporting(true);
+    try {
+      const response = await apiClient.exportAnalytics("csv");
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "analytics-export.csv";
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } finally {
+      setExporting(false);
+    }
+  }
+
+  const STATS = overview
+    ? [
+        { label: "Total Listings", value: overview.totalListings, icon: Building2 },
+        { label: "Active Listings", value: overview.activeListings, icon: TrendingUp },
+        { label: "Total Inquiries", value: overview.totalInquiries, icon: MessageSquare },
+        { label: "Monthly Active Users", value: overview.monthlyActiveUsers, icon: Users },
+      ]
+    : [];
+
   return (
-    <DashboardLayout navItems={NAV}>
-      <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-semibold text-white sm:text-3xl">Analytics Overview</h1>
-        <p className="text-base text-muted">Track your property performance and engagement metrics.</p>
+    <DashboardLayout navItems={ADMIN_NAV}>
+      <SEO title="Analytics" description="Track platform performance, revenue, and regional trends across the EstateIn marketplace." />
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-2xl font-semibold text-white sm:text-3xl">Analytics Overview</h1>
+          <p className="text-base text-muted">Platform-wide performance and regional trends.</p>
+        </div>
+        <button
+          onClick={handleExport}
+          disabled={exporting}
+          className="flex items-center gap-2 rounded-[10px] border border-border px-5 py-2.5 text-sm font-medium text-white hover:border-primary hover:text-primary-text disabled:opacity-60"
+        >
+          <Download size={16} />
+          {exporting ? "Exporting…" : "Export CSV"}
+        </button>
       </div>
 
-      {/* Summary Cards */}
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {STATS.map((stat) => (
-          <div key={stat.label} className="flex flex-col gap-3 rounded-xl border border-border p-6">
-            <stat.icon className={stat.accent} size={22} />
-            <span className="text-2xl font-semibold text-white">{stat.value}</span>
-            <span className="text-sm text-muted">{stat.label}</span>
-          </div>
+      <div className="mt-6 flex gap-2 border-b border-border">
+        {(["Overview", "Regional"] as Tab[]).map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`border-b-2 px-4 py-2.5 text-sm font-medium transition-colors ${
+              tab === t ? "border-primary text-primary-text" : "border-transparent text-muted hover:text-white"
+            }`}
+          >
+            {t}
+          </button>
         ))}
       </div>
 
-      {/* Property Views Chart */}
-      <div className="mt-8 rounded-xl border border-border p-6 md:p-10">
-        <h2 className="text-xl font-semibold text-white sm:text-2xl">Property Views</h2>
-        <p className="mt-1 text-sm text-muted">Views per listing this month</p>
-        <div className="mt-8 flex flex-col gap-5">
-          {BAR_DATA.map((item) => (
-            <div key={item.label} className="flex flex-col gap-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-white">{item.label}</span>
-                <span className="text-sm font-medium text-muted">{item.views.toLocaleString()}</span>
-              </div>
-              <div className="h-3 w-full overflow-hidden rounded-full bg-white/5">
-                <div
-                  className={`h-full rounded-full transition-all duration-700 ${item.color}`}
-                  style={{ width: `${(item.views / MAX_VIEWS) * 100}%` }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      {tab === "Overview" && (
+        <>
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {loading
+              ? Array.from({ length: 4 }).map((_, i) => <SkeletonStatCard key={i} />)
+              : STATS.map((stat) => (
+                  <div key={stat.label} className="flex flex-col gap-3 rounded-xl border border-border p-6">
+                    <stat.icon className="text-primary-text" size={22} />
+                    <span className="text-2xl font-semibold text-white">{stat.value.toLocaleString()}</span>
+                    <span className="text-sm text-muted">{stat.label}</span>
+                  </div>
+                ))}
+          </div>
 
-      {/* Monthly Trend */}
-      <div className="mt-8 rounded-xl border border-border p-6 md:p-10">
-        <h2 className="text-xl font-semibold text-white sm:text-2xl">Monthly Trends</h2>
-        <p className="mt-1 text-sm text-muted">Total views across all listings per month</p>
-        <div className="mt-8 flex items-end gap-2" style={{ height: "200px" }}>
-          {MONTHLY.map((m) => (
-            <div key={m.label} className="flex flex-1 flex-col items-center gap-2">
-              <div className="w-full flex justify-center">
-                <div
-                  className="w-full rounded-t-lg bg-primary/80 transition-all duration-500"
-                  style={{ height: `${(m.value / MAX_MONTHLY) * 160}px` }}
-                  title={`${m.label}: ${m.value.toLocaleString()} views`}
-                />
-              </div>
-              <span className="text-[10px] text-muted sm:text-xs">{m.label}</span>
+          {overview && (
+            <div className="mt-8 rounded-xl border border-border p-6 md:p-10">
+              <h2 className="text-xl font-semibold text-white sm:text-2xl">Total Revenue</h2>
+              <p className="mt-2 text-3xl font-semibold text-primary-text">
+                KSh {overview.totalRevenue.toLocaleString()}
+              </p>
+              <p className="mt-1 text-sm text-muted">From completed payments (M-Pesa, card, bank transfer)</p>
             </div>
-          ))}
+          )}
+        </>
+      )}
+
+      {tab === "Regional" && (
+        <div className="mt-8 flex flex-col gap-8">
+          <div className="rounded-xl border border-border p-6 md:p-10">
+            <h2 className="text-xl font-semibold text-white sm:text-2xl">Properties by County</h2>
+            <p className="mt-1 text-sm text-muted">Listing count across top counties</p>
+            <div className="mt-6 h-[320px]">
+              {loading ? (
+                <div className="h-full animate-pulse rounded-lg bg-white/5" />
+              ) : regional.length === 0 ? (
+                <p className="flex h-full items-center justify-center text-sm text-muted">No regional data yet</p>
+              ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={regional.slice(0, 10)}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
+                    <XAxis dataKey="county" stroke="#999999" fontSize={12} />
+                    <YAxis stroke="#999999" fontSize={12} />
+                    <Tooltip
+                      contentStyle={{ background: "#1a1a1a", border: "1px solid #262626", borderRadius: 8 }}
+                      labelStyle={{ color: "#fff" }}
+                    />
+                    <Bar dataKey="propertyCount" fill="#703bf7" radius={[4, 4, 0, 0]} name="Properties" />
+                  </BarChart>
+                </ResponsiveContainer>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div className="rounded-xl border border-border p-6 md:p-10">
+              <h2 className="text-xl font-semibold text-white">Inquiry Distribution</h2>
+              <div className="mt-6 h-[280px]">
+                {regional.length > 0 && (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={regional.slice(0, 6)}
+                        dataKey="inquiryCount"
+                        nameKey="county"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={90}
+                        label={(entry) => entry.county}
+                      >
+                        {regional.slice(0, 6).map((_, i) => (
+                          <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip contentStyle={{ background: "#1a1a1a", border: "1px solid #262626", borderRadius: 8 }} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                )}
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-border p-6 md:p-10">
+              <h2 className="text-xl font-semibold text-white">Regional Breakdown</h2>
+              <div className="mt-4 flex flex-col divide-y divide-border">
+                {regional.slice(0, 8).map((r) => (
+                  <div key={r.county} className="flex items-center justify-between py-3 text-sm">
+                    <span className="text-white">{r.county}</span>
+                    <div className="flex gap-4 text-muted">
+                      <span>{r.propertyCount} listings</span>
+                      <span>KSh {r.avgPrice.toLocaleString()} avg</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </DashboardLayout>
   );
 }

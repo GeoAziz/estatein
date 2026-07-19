@@ -192,24 +192,39 @@ This document lists all the features and gaps from VALIDATION_CHECKLIST.md that 
 
 ### 1. **Search Engine**
 - ✅ Elasticsearch container in docker-compose
-- ⚠️ Integration layer with backend needs implementation
-- ⚠️ Indexing pipeline for properties needs implementation
+- ✅ Integration layer with backend (elasticsearch.ts service)
+- ✅ Indexing pipeline for properties (bulk reindex, individual index/remove)
+- ✅ Full-text search with fuzzy matching and autocomplete
+- ✅ Admin reindex endpoint at `POST /api/admin/reindex`
+- ✅ Prisma fallback when ES unavailable
 
 ### 2. **Redis Caching**
 - ✅ Redis service in docker-compose with persistence
-- ⚠️ Cache layer in backend services needs implementation
-- ⚠️ Cache invalidation strategy needs implementation
+- ✅ Cache service (get/set/del/pattern) with TTL support
+- ✅ Currency exchange rate caching via Redis
+- ✅ M-Pesa token caching via Redis
+- ✅ Search result caching for non-text queries
+- ✅ Notification unread count caching
+- ✅ Redis-backed rate limiting (graceful fallback to memory)
 
 ### 3. **Verification & KYC**
 - ✅ Database fields for ID documents and verification status
 - ✅ Document upload and storage capability
-- ⚠️ ID verification workflow needs implementation
-- ⚠️ KYC approval process needs implementation
+- ✅ User KYC submission endpoint (`POST /api/kyc/submit`)
+- ✅ Admin verification approval/rejection (`PUT /api/admin/users/:id/verify`)
+- ✅ State transition guard (unverified → pending → verified/rejected)
+- ✅ Admin pending-verification queue (`GET /api/admin/pending-verification`)
+- ✅ Notifications for all verification events
+- ✅ Agent license verification linkage
+- ✅ Frontend API methods for KYC flow
 
 ### 4. **AI Features**
-- ⚠️ Property valuation model interface designed
-- ⚠️ Price prediction structure in place
-- ⚠️ ML model integration needs implementation
+- ✅ Weighted comparable property scoring algorithm
+- ✅ Automated valuation model (confidence-scored estimates)
+- ✅ Real market trend computation from database data
+- ✅ Price history and trend analysis
+- ✅ Price-per-square-foot computation
+- ✅ Frontend MarketTrends wired to real backend data
 
 ---
 
@@ -258,21 +273,33 @@ estate/
 │   ├── prisma/
 │   │   └── schema.prisma           # Updated database schema
 │   ├── src/
+│   │   ├── config/
+│   │   │   ├── redis.ts            # Redis client configuration
+│   │   │   └── elasticsearch.ts    # Elasticsearch client configuration
 │   │   ├── controllers/
 │   │   │   ├── payments.ts         # Payment handling (M-Pesa)
 │   │   │   ├── documents.ts        # Document management
-│   │   │   └── locations.ts        # Location/county management
+│   │   │   ├── locations.ts        # Location/county management
+│   │   │   ├── kyc.ts              # KYC verification workflow
+│   │   │   └── properties.ts       # Property CRUD + valuation
 │   │   ├── services/
-│   │   │   ├── currency.ts         # Currency conversion
-│   │   │   ├── mpesa.ts            # M-Pesa integration
+│   │   │   ├── currency.ts         # Currency conversion (Redis-cached)
+│   │   │   ├── mpesa.ts            # M-Pesa integration (Redis-cached)
 │   │   │   ├── sms.ts              # SMS notifications
 │   │   │   ├── fcm.ts              # Firebase Cloud Messaging
 │   │   │   ├── oauth.ts            # Google/Apple OAuth
-│   │   │   └── websocket.ts        # Real-time messaging
+│   │   │   ├── websocket.ts        # Real-time messaging
+│   │   │   ├── cache.ts            # Redis cache service
+│   │   │   ├── elasticsearch.ts    # ES indexing + search
+│   │   │   ├── search.ts           # Search with ES/Prisma fallback
+│   │   │   ├── valuation.ts        # Property valuation algorithm
+│   │   │   └── notification.ts     # Notifications (Redis-cached counts)
 │   │   └── routes/
 │   │       ├── payments.ts         # Payment endpoints
 │   │       ├── documents.ts        # Document endpoints
-│   │       └── locations.ts        # Location endpoints
+│   │       ├── locations.ts        # Location endpoints
+│   │       ├── kyc.ts              # KYC verification endpoints
+│   │       └── admin.ts            # Admin endpoints (KYC + reindex)
 │   └── package.json                # Updated dependencies
 └── app/
     └── Dockerfile                  # Frontend containerization
@@ -327,10 +354,13 @@ curl -X POST http://localhost:3000/api/payments/initiate \
 | Messaging | WebSocket + Real-time | ✅ Complete | 100% |
 | Search Filters | All filters | ✅ Complete | 100% |
 | Infrastructure | Docker + CI/CD | ✅ Complete | 100% |
+| Search Engine | Elasticsearch integration | ✅ Complete | 100% |
+| Caching | Redis caching layer | ✅ Complete | 100% |
+| KYC/Verification | Full workflow | ✅ Complete | 100% |
+| AI Valuation | Comparable scoring + trends | ✅ Complete | 100% |
+| Frontend API Wiring | Dashboard + listings + trends | ✅ Complete | 100% |
 | Map Integration | Google/Mapbox | ⚠️ Partial | 30% |
-| Verification | KYC Foundation | ⚠️ Partial | 50% |
-| Search Engine | Elasticsearch | ⚠️ Partial | 20% |
-| **Overall MVP** | **Kenya Market** | **✅ Ready** | **~85%** |
+| **Overall MVP** | **Kenya Market** | **✅ Ready** | **~95%** |
 
 ---
 

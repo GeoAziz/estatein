@@ -25,6 +25,10 @@ import maintenanceRequestsRoutes from "./maintenanceRequests.js";
 import supportTicketsRoutes from "./supportTickets.js";
 import systemSettingsRoutes from "./systemSettings.js";
 import mortgageApplicationsRoutes from "./mortgageApplications.js";
+import kycRoutes from "./kyc.js";
+import geoRoutes from "./geo.js";
+import availabilityRoutes from "./availability.js";
+import analyticsRoutes from "./analytics.js";
 
 const router = Router();
 
@@ -54,5 +58,9 @@ router.use("/maintenance-requests", maintenanceRequestsRoutes);
 router.use("/support-tickets", supportTicketsRoutes);
 router.use("/system-settings", systemSettingsRoutes);
 router.use("/mortgage-applications", mortgageApplicationsRoutes);
+router.use("/kyc", kycRoutes);
+router.use("/geo", geoRoutes);
+router.use("/availability", availabilityRoutes);
+router.use("/admin/analytics", analyticsRoutes);
 
 export default router;

@@ -5,6 +5,14 @@ import { NotFoundError, AuthorizationError } from "../utils/errors.js";
 import { sendSuccess, sendPaginated } from "../utils/response.js";
 import { createNotification } from "../services/notification.js";
 import { trackEvent } from "../services/telemetry.js";
+import { createSmsProvider, SMS_TEMPLATES } from "../services/sms.js";
+
+const smsProvider = createSmsProvider({
+  provider: (process.env.SMS_PROVIDER || "africastalking") as any,
+  apiKey: process.env.SMS_API_KEY || "",
+  apiSecret: process.env.SMS_API_SECRET,
+  senderId: process.env.SMS_SENDER_ID || "ESTATEIN",
+});
 
 export async function getInquiries(req: AuthRequest, res: Response, next: NextFunction) {
   try {
@@ -86,23 +94,49 @@ export async function createInquiry(req: AuthRequest, res: Response, next: NextF
   try {
     const {
       propertyId, listingId, agentId, message, contactMethod,
-      viewingRequested, viewingDate, viewingTime, proposedOfferPrice,
+      viewingRequested, viewingDate, viewingTime, proposedOfferPrice, slotId,
     } = req.body;
 
-    const inquiry = await prisma.inquiry.create({
-      data: {
-        buyerId: req.user!.id,
-        propertyId,
-        listingId,
-        agentId,
-        message,
-        contactMethod,
-        viewingRequested,
-        viewingDate: viewingDate ? new Date(viewingDate) : undefined,
-        viewingTime,
-        proposedOfferPrice,
-        viewingStatus: viewingRequested ? "requested" : undefined,
-      },
+    let resolvedViewingDate = viewingDate ? new Date(viewingDate) : undefined;
+    let resolvedViewingTime = viewingTime;
+
+    if (slotId) {
+      const slot = await prisma.agentAvailabilitySlot.findUnique({ where: { id: slotId } });
+      if (!slot) throw new NotFoundError("Availability slot not found");
+      if (slot.isBooked) throw new AuthorizationError("This slot has already been booked");
+      resolvedViewingDate = slot.date;
+      resolvedViewingTime = slot.startTime;
+    }
+
+    // Wrap slot booking + inquiry creation in a transaction so two buyers
+    // racing for the same slot can't both succeed.
+    const inquiry = await prisma.$transaction(async (tx) => {
+      if (slotId) {
+        const claimed = await tx.agentAvailabilitySlot.updateMany({
+          where: { id: slotId, isBooked: false },
+          data: { isBooked: true },
+        });
+        if (claimed.count === 0) {
+          throw new AuthorizationError("This slot has already been booked");
+        }
+      }
+
+      return tx.inquiry.create({
+        data: {
+          buyerId: req.user!.id,
+          propertyId,
+          listingId,
+          agentId,
+          slotId: slotId || undefined,
+          message,
+          contactMethod,
+          viewingRequested: viewingRequested || Boolean(slotId),
+          viewingDate: resolvedViewingDate,
+          viewingTime: resolvedViewingTime,
+          proposedOfferPrice,
+          viewingStatus: (viewingRequested || slotId) ? "requested" : undefined,
+        },
+      });
     });
 
     // Increment property inquiry count
@@ -156,7 +190,10 @@ export async function updateViewingStatus(req: AuthRequest, res: Response, next:
     const id = String(req.params.id);
     const { viewingStatus } = req.body;
 
-    const inquiry = await prisma.inquiry.findUnique({ where: { id } });
+    const inquiry = await prisma.inquiry.findUnique({
+      where: { id },
+      include: { buyer: true, property: { select: { address: true, city: true } } },
+    });
     if (!inquiry) throw new NotFoundError("Inquiry not found");
     if (!isInquiryParticipant(inquiry, req)) throw new AuthorizationError("Unauthorized");
 
@@ -165,9 +202,82 @@ export async function updateViewingStatus(req: AuthRequest, res: Response, next:
       data: { viewingStatus },
     });
 
+    if (viewingStatus === "confirmed") {
+      await notifyViewingConfirmed(inquiry);
+    }
+
+    // Free the associated availability slot when a viewing is cancelled.
+    if (viewingStatus === "cancelled" && inquiry.slotId) {
+      await prisma.agentAvailabilitySlot.update({
+        where: { id: inquiry.slotId },
+        data: { isBooked: false },
+      }).catch(() => {});
+    }
+
     sendSuccess(res, { inquiry: updated });
   } catch (err) {
     next(err);
+  }
+}
+
+export async function updateViewingSchedule(req: AuthRequest, res: Response, next: NextFunction) {
+  try {
+    const id = String(req.params.id);
+    const { viewingDate, viewingTime } = req.body;
+
+    const inquiry = await prisma.inquiry.findUnique({ where: { id } });
+    if (!inquiry) throw new NotFoundError("Inquiry not found");
+    if (!isInquiryParticipant(inquiry, req)) throw new AuthorizationError("Unauthorized");
+    if (!inquiry.viewingRequested) throw new AuthorizationError("This inquiry has no viewing to reschedule");
+
+    const updated = await prisma.inquiry.update({
+      where: { id },
+      data: {
+        viewingDate: viewingDate ? new Date(viewingDate) : inquiry.viewingDate,
+        viewingTime: viewingTime ?? inquiry.viewingTime,
+        // A reschedule needs re-confirmation from whichever side didn't initiate it.
+        viewingStatus: "requested",
+      },
+    });
+
+    await createNotification({
+      userId: inquiry.buyerId,
+      type: "viewing",
+      title: "Viewing rescheduled",
+      message: `Your property viewing has been rescheduled to ${updated.viewingDate?.toDateString()} at ${updated.viewingTime}.`,
+      link: `/dashboard/buyer`,
+    });
+
+    sendSuccess(res, { inquiry: updated });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function notifyViewingConfirmed(inquiry: {
+  buyerId: string;
+  buyer: { phone: string | null; name: string };
+  property: { address: string; city: string } | null;
+  viewingDate: Date | null;
+  viewingTime: string | null;
+}) {
+  const address = inquiry.property ? `${inquiry.property.address}, ${inquiry.property.city}` : "the property";
+  const when = `${inquiry.viewingDate?.toDateString() ?? ""} at ${inquiry.viewingTime ?? ""}`;
+
+  await createNotification({
+    userId: inquiry.buyerId,
+    type: "viewing",
+    title: "Viewing confirmed",
+    message: `Your viewing for ${address} is confirmed for ${when}.`,
+    link: `/dashboard/buyer`,
+  });
+
+  if (inquiry.buyer.phone) {
+    try {
+      await smsProvider.send(inquiry.buyer.phone, SMS_TEMPLATES.VIEWING_REMINDER(address, when));
+    } catch {
+      // Best-effort — SMS failures shouldn't block the confirm action.
+    }
   }
 }
 

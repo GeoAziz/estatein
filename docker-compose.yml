@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # PostgreSQL Database
   postgres:
@@ -9,12 +7,12 @@ services:
       POSTGRES_USER: estate_dev
       POSTGRES_PASSWORD: local_password
       POSTGRES_DB: estate_dev
-      POSTGRES_INITDB_ARGS: "-c timezone=Africa/Nairobi"
+      TZ: Africa/Nairobi
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - "5433:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U estate_dev"]
       interval: 10s
@@ -27,39 +25,13 @@ services:
   redis:
     image: redis:7-alpine
     container_name: estatein-redis
-    command: redis-server --appendonly yes --requirepass redis_password
+    command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
     ports:
-      - "6379:6379"
+      - "6380:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - estatein
-
-  # LocalStack (AWS mock services)
-  localstack:
-    image: localstack/localstack:latest
-    container_name: estatein-localstack
-    environment:
-      SERVICES: s3,sqs,sns
-      DEBUG: 1
-      DATA_DIR: /tmp/localstack/data
-      DOCKER_HOST: unix:///var/run/docker.sock
-      AWS_DEFAULT_REGION: us-east-1
-      AWS_ACCESS_KEY_ID: local
-      AWS_SECRET_ACCESS_KEY: local
-    volumes:
-      - "${TMPDIR:-.}/.localstack:/tmp/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    ports:
-      - "4566:4566"
-      - "4571:4571"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -133,51 +105,51 @@ services:
       context: ./estate-backend
       dockerfile: Dockerfile
     container_name: estatein-backend
+    env_file:
+      - ./estate-backend/.env
     environment:
-      NODE_ENV: development
+      # Override host-oriented values from .env with in-network hostnames
       DATABASE_URL: "postgresql://estate_dev:local_password@postgres:5432/estate_dev"
-      REDIS_URL: "redis://:redis_password@redis:6379"
-      AWS_ENDPOINT: "http://localstack:4566"
-      AWS_REGION: us-east-1
-      AWS_ACCESS_KEY_ID: local
-      AWS_SECRET_ACCESS_KEY: local
-      S3_BUCKET: estatein-images
+      REDIS_URL: "redis://redis:6379"
       ELASTICSEARCH_URL: "http://elasticsearch:9200"
-      JWT_SECRET: dev-secret-change-in-production
-      FRONTEND_URL: http://localhost:5173
-    volumes:
-      - ./estate-backend/src:/app/src
-      - ./estate-backend/prisma:/app/prisma
-    ports:
-      - "3000:3000"
+      SMTP_HOST: "mailhog"
+      # This machine already runs a LocalStack instance on the host (outside this
+      # compose project); reuse it via the host gateway rather than running a second one.
+      AWS_ENDPOINT: "http://host.docker.internal:4566"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
-      localstack:
-        condition: service_healthy
     networks:
       - estatein
-    command: npm run dev
 
-  # Frontend (React + Vite)
+  # Frontend (static production build, served by its own nginx)
   frontend:
     build:
       context: ./app
       dockerfile: Dockerfile
     container_name: estatein-frontend
-    environment:
-      VITE_API_URL: http://localhost:3000
-    ports:
-      - "5173:5173"
-    volumes:
-      - ./app/src:/app/src
     depends_on:
       - backend
     networks:
       - estatein
-    command: npm run dev
+
+  # Reverse proxy — single public entrypoint, this is the only port ngrok needs to forward to
+  nginx:
+    image: nginx:alpine
+    container_name: estatein-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - estatein
 
 networks:
   estatein:

@@ -1,5 +1,7 @@
 // Currency conversion and handling service for Kenyan markets
 
+import { cacheGet, cacheSet } from "./cache.js";
+
 export enum Currency {
   KSH = 'KSH',
   USD = 'USD',
@@ -21,14 +23,7 @@ const EXCHANGE_RATES: ExchangeRates = {
   'KSH/GBP': 0.0061,
 };
 
-// Cache for recent exchange rates with timestamp
-interface RateCache {
-  timestamp: number;
-  rate: number;
-}
-
-const rateCache: Map<string, RateCache> = new Map();
-const CACHE_DURATION_MS = 3600000; // 1 hour
+const CACHE_DURATION_SECONDS = 3600; // 1 hour
 
 export async function convertCurrency(
   amount: number,
@@ -40,39 +35,26 @@ export async function convertCurrency(
     return amount;
   }
 
-  const cacheKey = `${fromCurrency}/${toCurrency}`;
+  const cacheKey = `currency:${fromCurrency}/${toCurrency}`;
 
-  // Check cache first
-  if (useCache && rateCache.has(cacheKey)) {
-    const cached = rateCache.get(cacheKey)!;
-    if (Date.now() - cached.timestamp < CACHE_DURATION_MS) {
+  if (useCache) {
+    const cached = await cacheGet<{ rate: number }>(cacheKey);
+    if (cached) {
       return amount * cached.rate;
     }
   }
 
-  // Get rate
-  const rate = EXCHANGE_RATES[cacheKey];
+  const rate = EXCHANGE_RATES[`${fromCurrency}/${toCurrency}`];
   if (!rate) {
-    throw new Error(`Exchange rate not available for ${cacheKey}`);
+    throw new Error(`Exchange rate not available for ${fromCurrency}/${toCurrency}`);
   }
 
-  // Cache the rate
-  rateCache.set(cacheKey, {
-    timestamp: Date.now(),
-    rate,
-  });
+  await cacheSet(cacheKey, { rate }, CACHE_DURATION_SECONDS);
 
   return amount * rate;
 }
 
 export function formatCurrency(amount: number, currency: Currency = Currency.KSH): string {
-  const symbols: Record<Currency, string> = {
-    KSH: 'KSh',
-    USD: '$',
-    EUR: '€',
-    GBP: '£',
-  };
-
   const formatter = new Intl.NumberFormat('en-KE', {
     style: 'currency',
     currency,

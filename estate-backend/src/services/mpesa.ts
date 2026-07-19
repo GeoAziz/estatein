@@ -1,6 +1,7 @@
 // M-Pesa payment integration service for Kenya
 
 import axios from 'axios';
+import { cacheGet, cacheSet } from './cache.js';
 
 export interface MpesaConfig {
   consumerKey: string;
@@ -46,8 +47,6 @@ export interface MpesaTransaction {
 
 class MpesaService {
   private config: MpesaConfig;
-  private accessToken: string | null = null;
-  private tokenExpiry: number = 0;
 
   constructor(config: MpesaConfig) {
     this.config = config;
@@ -60,9 +59,10 @@ class MpesaService {
   }
 
   async getAccessToken(): Promise<string> {
-    // Return cached token if still valid
-    if (this.accessToken && Date.now() < this.tokenExpiry) {
-      return this.accessToken;
+    const cacheKey = 'mpesa:access_token';
+    const cached = await cacheGet<{ token: string }>(cacheKey);
+    if (cached) {
+      return cached.token;
     }
 
     try {
@@ -79,11 +79,11 @@ class MpesaService {
         }
       );
 
-      this.accessToken = response.data.access_token as string;
-      // Set expiry to 1 hour from now (but refresh after 50 minutes to be safe)
-      this.tokenExpiry = Date.now() + 50 * 60 * 1000;
+      const token = response.data.access_token as string;
+      // Cache for 50 minutes (token valid for 1 hour)
+      await cacheSet(cacheKey, { token }, 50 * 60);
 
-      return this.accessToken!;
+      return token;
     } catch (error) {
       console.error('Failed to get M-Pesa access token:', error);
       throw error;
@@ -97,7 +97,6 @@ class MpesaService {
     description: string
   ): Promise<MpesaInitiateResponse> {
     try {
-      // Format phone number to international format if needed
       const formattedPhone = this.formatPhoneNumber(phoneNumber);
 
       const token = await this.getAccessToken();
@@ -213,20 +212,13 @@ class MpesaService {
   }
 
   private formatPhoneNumber(phone: string): string {
-    // Remove any existing +, spaces, or dashes
     const cleaned = phone.replace(/[^\d]/g, '');
-
-    // If it starts with 0, replace with 254
     if (cleaned.startsWith('0')) {
       return '254' + cleaned.substring(1);
     }
-
-    // If it starts with 254, return as is
     if (cleaned.startsWith('254')) {
       return cleaned;
     }
-
-    // Otherwise prepend 254
     return '254' + cleaned;
   }
 

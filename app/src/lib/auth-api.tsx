@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { Navigate, useLocation } from "react-router-dom";
 import { apiClient } from "./api-client";
 
-export type Role = "buyer" | "agent" | "admin";
+export type Role = "buyer" | "agent" | "admin" | "developer" | "property_manager";
 
 export interface User {
   id: string;
@@ -16,7 +16,9 @@ export interface User {
   bio?: string;
   serviceAreas?: string[];
   verified?: boolean;
+  twoFactorEnabled?: boolean;
   createdAt?: string;
+  agent?: { id: string };
   notifications?: {
     emailInquiries: boolean;
     emailViewings: boolean;
@@ -46,11 +48,17 @@ type SignUpInput = {
   licenseState?: string;
 };
 
+type LoginResult =
+  | { ok: true; user: User }
+  | { ok: false; error: string }
+  | { ok: "requires2FA"; userId: string };
+
 type AuthContextValue = {
   user: User | undefined;
   loading: boolean;
   signUp: (input: SignUpInput) => Promise<{ ok: true; user: User } | { ok: false; error: string }>;
-  logIn: (email: string, password: string) => Promise<{ ok: true; user: User } | { ok: false; error: string }>;
+  logIn: (email: string, password: string) => Promise<LoginResult>;
+  verify2FALogin: (userId: string, code: string) => Promise<{ ok: true; user: User } | { ok: false; error: string }>;
   logOut: () => Promise<void>;
   refresh: () => void;
   updateUser: (patch: Partial<User>) => void;
@@ -104,13 +112,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function logIn(email: string, password: string) {
+  async function logIn(email: string, password: string): Promise<LoginResult> {
     try {
       const result = await apiClient.login(email, password);
+      if ("requires2FA" in result) {
+        return { ok: "requires2FA" as const, userId: result.userId };
+      }
       setUser(result.user as User);
       return { ok: true as const, user: result.user as User };
     } catch (error: any) {
       return { ok: false as const, error: error.message || "Login failed" };
+    }
+  }
+
+  async function verify2FALogin(userId: string, code: string) {
+    try {
+      const result = await apiClient.verifyLogin2FA(userId, code);
+      setUser(result.user as User);
+      return { ok: true as const, user: result.user as User };
+    } catch (error: any) {
+      return { ok: false as const, error: error.message || "Invalid code" };
     }
   }
 
@@ -136,6 +157,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loading,
     signUp,
     logIn,
+    verify2FALogin,
     logOut,
     refresh,
     updateUser,
@@ -153,6 +175,8 @@ export function useAuth() {
 export function dashboardPathForRole(role: Role) {
   if (role === "agent") return "/dashboard/agent";
   if (role === "admin") return "/admin/dashboard";
+  if (role === "property_manager") return "/dashboard/property-manager";
+  // developer role deferred to v2 — fall back to buyer dashboard
   return "/dashboard/buyer";
 }
 

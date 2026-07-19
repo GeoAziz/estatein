@@ -4,8 +4,8 @@ import { PrimaryButton, Section, SectionHeading } from "../components/ui";
 import BlurImage from "../components/BlurImage";
 import { SkeletonCard } from "../components/Skeleton";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 import { apiClient } from "../lib/api-client";
-import { RENTAL_PROPERTIES } from "../data/listings";
 
 type RentalProperty = {
   slug: string;
@@ -22,36 +22,33 @@ type RentalProperty = {
 };
 
 const LEASE_TERMS = ["Any Term", "Month-to-Month", "6-Month", "1-Year"];
-const RENT_RANGES = ["Any Price", "Under $2,000", "$2,000 – $3,000", "Over $3,000"];
+const RENT_RANGES = ["Any Price", "Under KSh 100K", "KSh 100K – KSh 300K", "Over KSh 300K"];
 
 export default function PropertiesForRent() {
   const [term, setTerm] = useState(LEASE_TERMS[0]);
-  const [properties, setProperties] = useState<RentalProperty[]>(RENTAL_PROPERTIES);
+  const [properties, setProperties] = useState<RentalProperty[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchProperties = useCallback(async () => {
     setLoading(true);
     try {
       const result = await apiClient.getProperties({ listingStatus: "rent", limit: 50 });
-      if (result?.properties?.length) {
-        setProperties(result.properties.map((p: any) => ({
-          slug: p.slug || p.id,
-          name: p.name || p.title,
-          image: p.images?.[0] || p.image || "",
-          summary: p.description?.slice(0, 150) || "",
-          beds: p.bedrooms || p.beds || 0,
-          baths: p.bathrooms || p.baths || 0,
-          leaseTerm: p.leaseTerm || "1-Year",
-          rent: p.price ? `$${Number(p.price).toLocaleString()}/mo` : "N/A",
-          furnished: p.furnished || "Unfurnished",
-          utilitiesIncluded: p.utilitiesIncluded || false,
-          petPolicy: p.petPolicy || "No pets",
-        })));
-      } else {
-        setProperties(RENTAL_PROPERTIES);
-      }
+      const items = result?.properties || result?.data || [];
+      setProperties(items.map((p: any) => ({
+        slug: p.slug || p.id,
+        name: p.name || p.title,
+        image: p.images?.[0] || p.image || "",
+        summary: p.description?.slice(0, 150) || "",
+        beds: p.bedrooms || p.beds || 0,
+        baths: p.bathrooms || p.baths || 0,
+        leaseTerm: p.leaseTerm || "1-Year",
+        rent: p.price ? `KSh ${Number(p.price).toLocaleString()}/mo` : "N/A",
+        furnished: p.furnished || "Unfurnished",
+        utilitiesIncluded: p.utilitiesIncluded || false,
+        petPolicy: p.petPolicy || "No pets",
+      })));
     } catch {
-      setProperties(RENTAL_PROPERTIES);
+      setProperties([]);
     } finally {
       setLoading(false);
     }
@@ -65,6 +62,10 @@ export default function PropertiesForRent() {
 
   return (
     <>
+      <SEO
+        title="Properties for Rent"
+        description="Browse rental homes across Kenya, from month-to-month studios to fully-furnished family houses, filterable by lease term and rent range."
+      />
       <Section className="border-b border-border pt-12 lg:pt-16">
         <SectionHeading
           align="center"

@@ -1,44 +1,14 @@
 import type { Response, NextFunction } from "express";
 import type { AuthRequest } from "../types/index.js";
 import prisma from "../config/database.js";
-import { NotFoundError } from "../utils/errors.js";
 import { sendSuccess } from "../utils/response.js";
+import { computeMarketTrends } from "../services/valuation.js";
 
 export async function getTrends(req: AuthRequest, res: Response, next: NextFunction) {
   try {
     const location = String(req.params.location);
-
-    const properties = await prisma.property.findMany({
-      where: {
-        OR: [
-          { city: { contains: location, mode: "insensitive" } },
-          { state: { contains: location, mode: "insensitive" } },
-        ],
-      },
-    });
-
-    if (properties.length === 0) {
-      return sendSuccess(res, {
-        medianPrice: 0,
-        priceChange: "0%",
-        daysOnMarket: 0,
-        inventory: 0,
-        trend: "stable",
-      });
-    }
-
-    const prices = properties.map((p) => p.price).sort((a, b) => a - b);
-    const medianPrice = prices[Math.floor(prices.length / 2)];
-    const avgDaysOnMarket =
-      properties.reduce((sum, p) => sum + (p.daysOnMarket || 0), 0) / properties.length;
-
-    sendSuccess(res, {
-      medianPrice,
-      priceChange: "+2.5%",
-      daysOnMarket: Math.round(avgDaysOnMarket),
-      inventory: properties.length,
-      trend: "stable",
-    });
+    const trends = await computeMarketTrends(location);
+    sendSuccess(res, trends);
   } catch (err) {
     next(err);
   }
@@ -54,6 +24,7 @@ export async function getSoldData(req: AuthRequest, res: Response, next: NextFun
         OR: [
           { city: { contains: location, mode: "insensitive" } },
           { state: { contains: location, mode: "insensitive" } },
+          { county: { contains: location, mode: "insensitive" } },
         ],
       },
       orderBy: { updatedAt: "desc" },
@@ -81,6 +52,7 @@ export async function getInventory(req: AuthRequest, res: Response, next: NextFu
         OR: [
           { city: { contains: location, mode: "insensitive" } },
           { state: { contains: location, mode: "insensitive" } },
+          { county: { contains: location, mode: "insensitive" } },
         ],
       },
     });
@@ -91,13 +63,13 @@ export async function getInventory(req: AuthRequest, res: Response, next: NextFu
     for (const p of properties) {
       byType[p.propertyType] = (byType[p.propertyType] || 0) + 1;
       const bracket =
-        p.price < 300000
-          ? "Under $300K"
-          : p.price < 500000
-            ? "$300K-$500K"
-            : p.price < 1000000
-              ? "$500K-$1M"
-              : "Over $1M";
+        p.price < 3000000
+          ? "Under KSh 3M"
+          : p.price < 10000000
+            ? "KSh 3M-10M"
+            : p.price < 30000000
+              ? "KSh 10M-30M"
+              : "Over KSh 30M";
       byPrice[bracket] = (byPrice[bracket] || 0) + 1;
     }
 
@@ -116,6 +88,7 @@ export async function getDaysOnMarket(req: AuthRequest, res: Response, next: Nex
         OR: [
           { city: { contains: location, mode: "insensitive" } },
           { state: { contains: location, mode: "insensitive" } },
+          { county: { contains: location, mode: "insensitive" } },
         ],
         daysOnMarket: { not: null },
       },

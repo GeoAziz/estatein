@@ -35,7 +35,7 @@ async function main() {
       name: "Estatein Admin",
       phone: "+1 (123) 555-0100",
       role: "admin",
-      isVerified: true,
+      verificationStatus: "verified",
     },
   });
 
@@ -46,7 +46,7 @@ async function main() {
       name: "Sarah Johnson",
       phone: "+1 (123) 456-7890",
       role: "agent",
-      isVerified: true,
+      verificationStatus: "verified",
     },
   });
 
@@ -57,7 +57,7 @@ async function main() {
       name: "Wade Warren",
       phone: "+1 (123) 555-0134",
       role: "buyer",
-      isVerified: true,
+      verificationStatus: "verified",
     },
   });
 

@@ -3,18 +3,19 @@ import { PrimaryButton, Section, SectionHeading } from "../components/ui";
 import PropertyCard from "../components/PropertyCard";
 import { SkeletonCard } from "../components/Skeleton";
 import CTASection from "../components/CTASection";
+import SEO from "../components/SEO";
 import { apiClient } from "../lib/api-client";
-import { PROPERTIES, type Property } from "../data/properties";
+import type { Property } from "../data/properties";
 
-const PRICE_RANGES = ["Any Price", "Under $500,000", "$500,000 – $1,000,000", "Over $1,000,000"];
+const PRICE_RANGES = ["Any Price", "Under KSh 5M", "KSh 5M – KSh 20M", "Over KSh 20M"];
 const BEDROOM_OPTIONS = ["Any", "1", "2", "3", "4+"];
-const TYPE_OPTIONS = ["Any Type", "Villa", "Apartment", "Cottage"];
+const TYPE_OPTIONS = ["Any Type", "house", "apartment", "townhouse", "land", "villa"];
 
 export default function PropertiesForSale() {
   const [price, setPrice] = useState(PRICE_RANGES[0]);
   const [beds, setBeds] = useState(BEDROOM_OPTIONS[0]);
   const [type, setType] = useState(TYPE_OPTIONS[0]);
-  const [properties, setProperties] = useState<Property[]>(PROPERTIES);
+  const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchProperties = useCallback(async () => {
@@ -28,32 +29,29 @@ export default function PropertiesForSale() {
         params.propertyType = type;
       }
       if (price !== "Any Price") {
-        if (price === "Under $500,000") params.maxPrice = 500000;
-        else if (price === "Over $1,000,000") params.minPrice = 1000000;
-        else { params.minPrice = 500000; params.maxPrice = 1000000; }
+        if (price === "Under KSh 5M") params.maxPrice = 5000000;
+        else if (price === "Over KSh 20M") params.minPrice = 20000000;
+        else { params.minPrice = 5000000; params.maxPrice = 20000000; }
       }
       const result = await apiClient.getProperties(params);
-      if (result?.properties?.length) {
-        setProperties(result.properties.map((p: any) => ({
-          slug: p.slug || p.id,
-          name: p.name || p.title,
-          location: p.city || p.location || "",
-          category: p.category || "",
-          price: p.price ? `$${Number(p.price).toLocaleString()}` : "Price TBD",
-          beds: p.bedrooms || p.beds || 0,
-          baths: p.bathrooms || p.baths || 0,
-          type: p.propertyType || p.type || "Property",
-          area: p.area || p.sqft ? `${p.sqft || p.area} sq ft` : "",
-          image: p.images?.[0] || p.image || "",
-          summary: p.description?.slice(0, 150) || "",
-          description: p.description || "",
-          features: p.features || [],
-        })));
-      } else {
-        setProperties(PROPERTIES);
-      }
+      const items = result?.properties || result?.data || [];
+      setProperties(items.map((p: any) => ({
+        slug: p.slug || p.id,
+        name: p.name || p.title,
+        location: p.city || p.location || "",
+        category: p.category || "",
+        price: p.price ? `KSh ${Number(p.price).toLocaleString()}` : "Price TBD",
+        beds: p.bedrooms || p.beds || 0,
+        baths: p.bathrooms || p.baths || 0,
+        type: p.propertyType || p.type || "Property",
+        area: p.area || p.sqft ? `${p.sqft || p.area} sq ft` : "",
+        image: p.images?.[0] || p.image || "",
+        summary: p.description?.slice(0, 150) || "",
+        description: p.description || "",
+        features: p.features || [],
+      })));
     } catch {
-      setProperties(PROPERTIES);
+      setProperties([]);
     } finally {
       setLoading(false);
     }
@@ -71,6 +69,10 @@ export default function PropertiesForSale() {
 
   return (
     <>
+      <SEO
+        title="Properties for Sale"
+        description="Browse homes for sale across Kenya, from coastal villas to city apartments, filterable by price, bedrooms, and property type."
+      />
       <Section className="border-b border-border pt-12 lg:pt-16">
         <SectionHeading
           align="center"

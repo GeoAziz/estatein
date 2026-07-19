@@ -1,26 +1,56 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Bath, BedDouble, CheckCircle2, MapPin, Ruler } from "lucide-react";
+import { Bath, BedDouble, CheckCircle2, MapPin, Ruler, School } from "lucide-react";
 import { PrimaryButton, Section, SectionHeading, SecondaryButton } from "../components/ui";
 import InquiryForm, { type FormField } from "../components/InquiryForm";
 import InquiryModal from "../components/InquiryModal";
 import BlurImage from "../components/BlurImage";
+import PropertyMap from "../components/PropertyMap";
 import { Skeleton } from "../components/Skeleton";
 import { FaqCard } from "../components/Faq";
 import CTASection from "../components/CTASection";
 import SEO from "../components/SEO";
 import { apiClient } from "../lib/api-client";
-import { PRICING_BREAKDOWN, PROPERTIES } from "../data/properties";
 import { HOME_FAQS } from "../data/content";
+import { PRICING_BREAKDOWN } from "../data/properties";
+import type { Property } from "../data/properties";
+
+interface Amenity {
+  id: string;
+  name: string;
+  type: string;
+  lat: number;
+  lng: number;
+  distance?: number;
+}
+
+const EMPTY_PROPERTY: Property = {
+  slug: "",
+  name: "Property Not Found",
+  location: "",
+  category: "",
+  price: "",
+  beds: 0,
+  baths: 0,
+  type: "",
+  area: "",
+  image: "",
+  summary: "",
+  description: "",
+  features: [],
+};
 
 export default function PropertyDetails() {
   const { slug } = useParams();
-  const [property, setProperty] = useState(PROPERTIES.find((p) => p.slug === slug) ?? PROPERTIES[0]);
+  const [property, setProperty] = useState<Property>(EMPTY_PROPERTY);
   const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+  const [nearbyAmenities, setNearbyAmenities] = useState<Amenity[]>([]);
 
   useEffect(() => {
     setLoading(true);
+    setNotFound(false);
     async function fetchProperty() {
       try {
         const result = await apiClient.getPropertyById(slug || "");
@@ -31,7 +61,7 @@ export default function PropertyDetails() {
             name: p.name || p.title || "Property",
             location: p.city || p.location || "",
             category: p.category || "",
-            price: p.price ? `$${Number(p.price).toLocaleString()}` : "Price TBD",
+            price: p.price ? `KSh ${Number(p.price).toLocaleString()}` : "Price TBD",
             beds: p.bedrooms || p.beds || 0,
             baths: p.bathrooms || p.baths || 0,
             type: p.propertyType || p.type || "Property",
@@ -40,15 +70,21 @@ export default function PropertyDetails() {
             summary: p.description?.slice(0, 150) || "",
             description: p.description || "",
             features: p.features || [],
+            lat: p.lat ?? undefined,
+            lng: p.lng ?? undefined,
           });
           if (p.id) apiClient.incrementPropertyViews(p.id).catch(() => {});
+          if (p.lat && p.lng) {
+            apiClient
+              .getNearbyAmenities(p.lat, p.lng, 5)
+              .then((res) => setNearbyAmenities(res?.amenities || []))
+              .catch(() => setNearbyAmenities([]));
+          }
         } else {
-          setProperty(PROPERTIES.find((p) => p.slug === slug) ?? PROPERTIES[0]);
+          setNotFound(true);
         }
       } catch {
-        // Fall back to the static entry for this slug rather than leaving
-        // the previous property's data on screen under the new URL.
-        setProperty(PROPERTIES.find((p) => p.slug === slug) ?? PROPERTIES[0]);
+        setNotFound(true);
       } finally {
         setLoading(false);
       }
@@ -77,6 +113,31 @@ export default function PropertyDetails() {
         title={property.name}
         description={property.description || property.summary}
         image={property.image}
+        canonical={typeof window !== "undefined" ? `${window.location.origin}/properties/${property.slug}` : undefined}
+        jsonLd={
+          !loading && !notFound
+            ? {
+                "@context": "https://schema.org",
+                "@type": "RealEstateListing",
+                name: property.name,
+                description: property.description || property.summary,
+                url: typeof window !== "undefined" ? `${window.location.origin}/properties/${property.slug}` : undefined,
+                image: property.image || undefined,
+                address: property.location
+                  ? {
+                      "@type": "PostalAddress",
+                      addressLocality: property.location,
+                      addressCountry: "KE",
+                    }
+                  : undefined,
+                offers: {
+                  "@type": "Offer",
+                  price: Number(property.price.replace(/[^0-9.]/g, "")) || undefined,
+                  priceCurrency: "KES",
+                },
+              }
+            : undefined
+        }
       />
       <Section className="pt-12 lg:pt-16">
         {loading ? (
@@ -93,6 +154,12 @@ export default function PropertyDetails() {
               <Skeleton className="h-64 w-full rounded-xl" />
               <Skeleton className="h-64 w-full rounded-xl" />
             </div>
+          </div>
+        ) : notFound ? (
+          <div className="flex flex-col items-center gap-6 py-20 text-center">
+            <h1 className="text-3xl font-semibold text-white">Property Not Found</h1>
+            <p className="text-base text-muted">The property you're looking for doesn't exist or has been removed.</p>
+            <PrimaryButton to="/properties">Browse Properties</PrimaryButton>
           </div>
         ) : (
           <>
@@ -166,6 +233,42 @@ export default function PropertyDetails() {
                 </ul>
               </div>
             </div>
+
+            {property.lat && property.lng && (
+              <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="flex flex-col gap-4">
+                  <h2 className="text-2xl font-semibold text-white">Location</h2>
+                  <PropertyMap
+                    markers={[{ name: property.name, price: property.price, lat: property.lat, lng: property.lng }]}
+                    center={{ lat: property.lat, lng: property.lng }}
+                    zoom={14}
+                  />
+                </div>
+                <div className="flex flex-col gap-4 rounded-xl border border-border p-6 md:p-10">
+                  <div className="flex items-center gap-2">
+                    <School size={20} className="text-primary-text" />
+                    <h2 className="text-2xl font-semibold text-white">Nearby Amenities</h2>
+                  </div>
+                  {nearbyAmenities.length === 0 ? (
+                    <p className="text-sm text-muted">No amenities found within 5km of this property.</p>
+                  ) : (
+                    <ul className="flex flex-col gap-3">
+                      {nearbyAmenities.slice(0, 8).map((a) => (
+                        <li key={a.id} className="flex items-center justify-between gap-3 border-b border-border pb-3 text-sm last:border-0 last:pb-0">
+                          <div className="flex flex-col">
+                            <span className="text-white">{a.name}</span>
+                            <span className="text-xs capitalize text-subtle">{a.type}</span>
+                          </div>
+                          {a.distance !== undefined && (
+                            <span className="shrink-0 text-xs text-muted">{a.distance.toFixed(1)} km</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            )}
           </>
         )}
       </Section>

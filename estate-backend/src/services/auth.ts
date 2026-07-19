@@ -3,6 +3,16 @@ import { hashPassword, comparePassword } from "../utils/hash.js";
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../utils/jwt.js";
 import { ConflictError, AuthenticationError, NotFoundError } from "../utils/errors.js";
 import { v4 as uuidv4 } from "uuid";
+import { generateOtp, verifyOtp } from "./otp.js";
+import { createSmsProvider, SMS_TEMPLATES } from "./sms.js";
+import type { UserRole } from "@prisma/client";
+
+const smsProvider = createSmsProvider({
+  provider: (process.env.SMS_PROVIDER || "africastalking") as any,
+  apiKey: process.env.SMS_API_KEY || "",
+  apiSecret: process.env.SMS_API_SECRET,
+  senderId: process.env.SMS_SENDER_ID || "ESTATEIN",
+});
 
 export async function register(data: {
   email: string;
@@ -74,6 +84,17 @@ export async function login(email: string, password: string) {
     throw new AuthenticationError("Account has been suspended");
   }
 
+  if (user.twoFactorEnabled) {
+    return { requires2FA: true as const, userId: user.id };
+  }
+
+  return generateSessionForUser(user);
+}
+
+// Shared by password login (once 2FA is confirmed), OTP-based login, and the
+// 2FA login-verification step — anywhere a session needs to be minted for a
+// user we've already authenticated by some other means.
+export function generateSessionForUser(user: { id: string; email: string; name: string; role: UserRole; phone: string | null }) {
   const token = generateAccessToken(user.id, user.email, user.role);
   const refreshToken = generateRefreshToken(user.id);
 
@@ -88,6 +109,35 @@ export async function login(email: string, password: string) {
     token,
     refreshToken,
   };
+}
+
+export async function requestOtpLogin(email: string) {
+  const user = await prisma.user.findUnique({ where: { email } });
+  // Deliberately don't reveal whether the account exists — the controller
+  // always returns a generic "check your phone" response either way.
+  if (!user || !user.isActive || !user.phone) return;
+
+  const code = await generateOtp(user.id, "login");
+  try {
+    await smsProvider.send(user.phone, SMS_TEMPLATES.VERIFICATION_CODE(code));
+  } catch {
+    // The endpoint always returns a generic success response regardless —
+    // an SMS provider outage shouldn't surface as a 500 or leak account state.
+  }
+}
+
+export async function verifyOtpLogin(email: string, code: string) {
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) {
+    throw new AuthenticationError("Invalid or expired code");
+  }
+  if (!user.isActive) {
+    throw new AuthenticationError("Account has been suspended");
+  }
+
+  await verifyOtp(user.id, code, "login");
+
+  return generateSessionForUser(user);
 }
 
 export async function refreshAccessToken(refreshToken: string) {
@@ -117,6 +167,7 @@ export async function getCurrentUser(userId: string) {
       role: true,
       verificationStatus: true,
       isActive: true,
+      twoFactorEnabled: true,
       createdAt: true,
       agent: {
         select: {
@@ -214,4 +265,15 @@ export async function changePassword(userId: string, currentPassword: string, ne
   });
 
   return { success: true, message: "Password updated successfully" };
+}
+
+export async function generateBackupCodes(userId: string) {
+  const twoFactor = await import("./twoFactor.js");
+  const result = await twoFactor.generateBackupCodes(userId);
+  return { codes: result.codes, message: "Backup codes generated. Store them in a safe place." };
+}
+
+export async function verifyBackupCode(userId: string, code: string) {
+  const twoFactor = await import("./twoFactor.js");
+  return await twoFactor.verifyBackupCode(userId, code);
 }

@@ -36,7 +36,7 @@
 | 1.1.9 | Session management (JWT refresh tokens) | ✅ | `refreshToken` in auth controller |
 | 1.1.10 | Account deactivation / deletion | ❌ | Not implemented |
 | 1.1.11 | Profile completion flow | ⚠️ | Profile page exists, completion tracking missing |
-| 1.1.12 | Identity verification (KYC) | ⚠️ | `verificationStatus` enum + `idDocumentUrl`/`idNumber` fields added |
+| 1.1.12 | Identity verification (KYC) | ✅ | Full workflow: user submission, admin approval/rejection, state transitions, notifications |
 
 ### 1.2 User Roles
 
@@ -155,9 +155,9 @@
 | # | Item | Status | Notes |
 |---|------|--------|-------|
 | 3.1.1 | PostgreSQL full-text search | ✅ | `search.ts` - Prisma `contains` with `insensitive` |
-| 3.1.2 | OpenSearch / Elasticsearch setup | ❌ | Not implemented |
+| 3.1.2 | OpenSearch / Elasticsearch setup | ✅ | Full integration: client, indexing, full-text search, fuzzy matching, autocomplete, reindex endpoint |
 | 3.1.3 | Search indexing pipeline | ❌ | Not implemented |
-| 3.1.4 | Redis caching layer | ❌ | Not implemented |
+| 3.1.4 | Redis caching layer | ✅ | Full integration: cache service, currency/MPesa token caching, search caching, rate limiting |
 | 3.1.5 | Search suggestions / autocomplete | ❌ | Not implemented |
 
 ### 3.2 Search Filters
@@ -337,7 +337,7 @@
 |---|------|--------|-------|
 | 9.1.1 | Natural language property search | ❌ | Not implemented |
 | 9.1.2 | AI chatbot for FAQs | ❌ | Not implemented |
-| 9.1.3 | Property valuation estimates | ❌ | Not implemented |
+| 9.1.3 | Property valuation estimates | ✅ | Weighted comparable scoring, confidence calculation, automated valuation model |
 | 9.1.4 | Price prediction | ❌ | Not implemented |
 | 9.1.5 | Investment scoring | ❌ | Not implemented |
 | 9.1.6 | Neighborhood summaries | ❌ | Not implemented |
@@ -526,7 +526,7 @@
 | 16.1.3 | Environment management (dev/staging/prod) | ⚠️ | `.env` files exist |
 | 16.1.4 | Database migrations (Prisma) | ✅ | Prisma schema |
 | 16.1.5 | Database seeding | ⚠️ | `seed.ts` exists |
-| 16.1.6 | Redis caching setup | ❌ | Not implemented |
+| 16.1.6 | Redis caching setup | ✅ | ioredis client, cache service, currency/MPesa/search/notification caching, rate limiting |
 | 16.1.7 | Object storage (S3) setup | ✅ | `s3.ts` + `config/aws.ts` |
 | 16.1.8 | CDN for static assets | ❌ | Not implemented |
 | 16.1.9 | SSL / TLS certificates | ❌ | Not implemented |
@@ -736,7 +736,7 @@
 
 | # | Item | Status |
 |---|------|--------|
-| 1 | OpenSearch / Elasticsearch | ❌ |
+| 1 | OpenSearch / Elasticsearch | ✅ |
 | 2 | Map-based search (Google Maps) | ❌ |
 | 3 | Booking / scheduling system | ❌ |
 | 4 | OTP-based login | ❌ |

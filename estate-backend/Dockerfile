@@ -1,7 +1,7 @@
 # Multi-stage build for EstateIn backend
 
 # Stage 1: Builder
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -25,7 +25,7 @@ RUN npx prisma generate
 RUN npm run build
 
 # Stage 2: Runtime
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -36,7 +36,7 @@ RUN apk add --no-cache dumb-init
 COPY package*.json ./
 
 # Install production dependencies only
-RUN npm ci --omit=dev
+RUN npm ci
 
 # `npm ci --omit=dev` installs the plain @prisma/client package, but not the
 # generated client code (that only exists after `prisma generate`, run above
@@ -61,7 +61,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
   CMD node ./health-check.js
 
 # Use dumb-init to handle signals properly
-ENTRYPOINT ["/usr/sbin/dumb-init", "--"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 # Start application
 CMD ["node", "dist/server.js"]

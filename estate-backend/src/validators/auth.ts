@@ -46,5 +46,32 @@ export const VerifyEmailSchema = z.object({
   token: z.string().min(1, "Verification token is required"),
 });
 
+export const SendOtpSchema = z.object({
+  type: z.enum(["phone_verification", "login"]).default("phone_verification"),
+});
+
+export const VerifyOtpSchema = z.object({
+  code: z.string().length(6, "Code must be 6 digits"),
+  type: z.enum(["phone_verification", "login"]).default("phone_verification"),
+});
+
+export const RequestOtpLoginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+});
+
+export const VerifyOtpLoginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  code: z.string().length(6, "Code must be 6 digits"),
+});
+
+export const Confirm2FASchema = z.object({
+  code: z.string().length(6, "Code must be 6 digits"),
+});
+
+export const VerifyLogin2FASchema = z.object({
+  userId: z.string().min(1),
+  code: z.string().length(6, "Code must be 6 digits"),
+});
+
 export type RegisterInput = z.infer<typeof RegisterSchema>;
 export type LoginInput = z.infer<typeof LoginSchema>;

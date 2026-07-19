@@ -1,8 +1,16 @@
-import { useState, type FormEvent } from "react";
-import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { useEffect, useState, type FormEvent } from "react";
+import { AlertCircle, CalendarCheck, CheckCircle2 } from "lucide-react";
 import { PrimaryButton } from "./ui";
 import { apiClient } from "../lib/api-client";
 import { useAuth } from "../lib/auth-api";
+
+interface AvailabilitySlot {
+  id: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  isBooked: boolean;
+}
 
 export type FormField = {
   name: string;
@@ -19,6 +27,7 @@ export default function InquiryForm({
   submitLabel = "Send Your Message",
   successMessage = "Thanks — your message is on its way. Our team will be in touch shortly.",
   propertyId,
+  agentId,
   source = "contact",
 }: {
   fields: FormField[];
@@ -26,6 +35,8 @@ export default function InquiryForm({
   successMessage?: string;
   /** When set, the inquiry is tied to a property and requires a signed-in buyer. */
   propertyId?: string;
+  /** When set alongside propertyId, shows a slot picker for booking a viewing with this agent. */
+  agentId?: string;
   /** Identifies which page/form submitted this lead, for the public contact endpoint. */
   source?: string;
 }) {
@@ -34,6 +45,20 @@ export default function InquiryForm({
   const [agreed, setAgreed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  const [slots, setSlots] = useState<AvailabilitySlot[]>([]);
+  const [slotsLoading, setSlotsLoading] = useState(false);
+  const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!agentId) return;
+    setSlotsLoading(true);
+    apiClient
+      .getAvailabilitySlots(agentId)
+      .then((result) => setSlots(result?.slots || []))
+      .catch(() => setSlots([]))
+      .finally(() => setSlotsLoading(false));
+  }, [agentId]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -56,6 +81,8 @@ export default function InquiryForm({
           message: value("message") || `Inquiry from ${value("firstName")} ${value("lastName")}`.trim(),
           contactMethod: "email",
           phone: value("phone") || undefined,
+          agentId: agentId || undefined,
+          slotId: selectedSlotId || undefined,
         });
       } else {
         await apiClient.submitContactMessage({
@@ -158,6 +185,48 @@ export default function InquiryForm({
           </div>
         ))}
       </div>
+
+      {agentId && (
+        <div className="flex flex-col gap-4 border-t border-border pt-8">
+          <div className="flex items-center gap-2">
+            <CalendarCheck className="text-primary-text" size={20} />
+            <h3 className="text-lg font-semibold text-white">Pick a Viewing Time (optional)</h3>
+          </div>
+          {slotsLoading ? (
+            <p className="text-sm text-muted">Loading available times…</p>
+          ) : slots.length === 0 ? (
+            <p className="text-sm text-muted">No open viewing slots right now — send a message and the agent will follow up.</p>
+          ) : (
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+              {slots.map((slot) => {
+                const dateLabel = new Date(slot.date).toLocaleDateString(undefined, {
+                  weekday: "short",
+                  month: "short",
+                  day: "numeric",
+                });
+                const selected = selectedSlotId === slot.id;
+                return (
+                  <button
+                    key={slot.id}
+                    type="button"
+                    onClick={() => setSelectedSlotId(selected ? null : slot.id)}
+                    className={`rounded-lg border px-3 py-2.5 text-left text-sm transition-colors ${
+                      selected
+                        ? "border-primary bg-primary/10 text-primary-text"
+                        : "border-border text-white hover:border-primary/60"
+                    }`}
+                  >
+                    <div className="font-medium">{dateLabel}</div>
+                    <div className="text-xs text-muted">
+                      {slot.startTime}–{slot.endTime}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
         <label className="flex items-center gap-2.5 text-base text-muted">

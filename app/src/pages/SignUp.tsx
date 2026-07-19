@@ -4,6 +4,7 @@ import { Bell, Building2, CheckCircle2, Eye, EyeOff, Heart, LineChart, MessageCi
 import { useAuth, dashboardPathForRole } from "../lib/auth-api";
 import { apiClient } from "../lib/api-client";
 import Confetti from "../components/Confetti";
+import SEO from "../components/SEO";
 
 const BUYER_BENEFITS = [
   { icon: Search, text: "Browse 10,000+ Properties" },
@@ -131,6 +132,7 @@ export default function SignUp() {
 
   return (
     <div className="grid min-h-[calc(100vh-73px)] grid-cols-1 bg-base lg:grid-cols-2">
+      <SEO title="Sign Up" description="Create a free Estatein account as a buyer or agent to browse listings, save favorites, and manage inquiries." />
       {/* Left */}
       <div className="hidden flex-col justify-between border-r border-border p-16 lg:flex">
         <div className="flex flex-col gap-10">
