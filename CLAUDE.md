@@ -4,17 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Layout
 
-This is a monorepo (not currently a git repo) with two independently run apps plus reference/design material:
+This is a monorepo with two independently run apps plus reference/design material:
 
 - `app/` — React 19 + TypeScript + Vite frontend ("EstateIn")
 - `estate-backend/` — Express + TypeScript + Prisma/PostgreSQL API
 - `figma-exact/` — Static JSON exports from the Figma REST API (text strings, layout specs) used as design reference when implementing pages pixel-for-pixel. Not application code.
 - `real-estate-business-website-ui-template---dark-theme-_-produce-ui-(community)-spec.md` — original design spec for the site.
 - `COMPLETED_IMPLEMENTATIONS.md`, `IMPLEMENTATION_GUIDE.md`, `VALIDATION_CHECKLIST.md` — living docs tracking the Kenya-market feature build-out (M-Pesa, counties/estates, multi-currency, etc.) against a validation checklist. Check these before assuming a feature is missing.
-- `docs/` — product-facing documentation: [docs/README.md](docs/README.md) indexes a product overview, full API reference, developer setup guide, and end-user guide. Keep these in sync when routes, auth, or user-facing flows change.
+- `TESTING_WORKFLOWS.md`, `LAUNCH_OPS_CHECKLIST.md`, `LAUNCH_IMPLEMENTATION_SUMMARY.md`, `README_LAUNCH.md` — manual launch-readiness test scripts and ops checklists (e.g. end-to-end viewing-scheduling + M-Pesa deposit flow), separate from the automated test suites below.
+- `docs/` — product-facing documentation: [docs/README.md](docs/README.md) indexes a PRD, software architecture doc (SAD), product overview, full API reference, developer setup guide, and end-user guide. Keep these in sync when routes, auth, or user-facing flows change.
+- `landing-pages/` — standalone static HTML landing pages (e.g. investor page), not part of the Vite app build.
 - Root `docker-compose.yml` — full-stack orchestration (Postgres, Redis, LocalStack, Elasticsearch, Prometheus, Grafana, Mailhog, backend, frontend). `estate-backend/docker-compose.yml` is a lighter dev-only compose (Postgres + LocalStack).
-
-There are no automated test suites configured in either `package.json` yet (`npm test` is a no-op); CI (`.github/workflows/test-and-build.yml`) runs `--if-present` so it currently no-ops on the test step too.
+- `ngrok.yml`, `start-dev.sh`, `start-ngrok.sh`, `use-local.sh`, `use-ngrok.sh`, `scripts/tunnel.sh` — optional tunneling setup for testing the app from external devices (e.g. real phones for M-Pesa/SMS flows); see `NGROK_SETUP.md`/`NGROK_README.md`. Not required for normal local dev.
 
 ## Commands
 
@@ -22,11 +23,14 @@ There are no automated test suites configured in either `package.json` yet (`npm
 ```bash
 cd app
 npm install
-npm run dev       # Vite dev server, http://localhost:5173
-npm run build     # tsc -b && vite build
-npm run lint      # oxlint
+npm run dev            # Vite dev server, http://localhost:5173
+npm run build           # tsc -b && vite build
+npm run lint             # oxlint
+npm test                  # vitest run (unit/component tests, src/**/__tests__)
+npm run test:e2e           # playwright test — mocks the backend via page.route(), no live API needed
 npm run preview
 ```
+Run a single frontend test file: `npx vitest run src/pages/__tests__/Login.test.tsx`. Run a single e2e spec: `npx playwright test e2e/auth.spec.ts`.
 
 ### Backend (`estate-backend/`)
 ```bash
@@ -39,10 +43,14 @@ npm run seed                # tsx prisma/seed.ts — creates demo accounts
 npm run dev                  # tsx watch src/server.ts, http://localhost:3000
 npm run build                # tsc
 npm run lint                  # eslint src/
+npm test                       # vitest run, src/__tests__/**/*.test.ts against a real Postgres (needs DATABASE_URL)
 npx prisma studio             # inspect DB
 ```
+Run a single backend test file: `npx vitest run src/__tests__/inquiries.test.ts`.
 
 Demo accounts (password `Password1` for all): `admin@estatein.com`, `agent@estatein.com`, `buyer@estatein.com`.
+
+CI (`.github/workflows/test-and-build.yml`) runs backend tests against a real Postgres service container (`prisma migrate deploy` first) and lints/builds both apps on push/PR to `main`/`develop`.
 
 ### Full stack via Docker
 ```bash

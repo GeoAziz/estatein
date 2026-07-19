@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { apiClient } from "./api-client";
+import * as demoAuth from "./demo/demo-auth";
+
+const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === "true";
 
 export type Role = "buyer" | "agent" | "admin" | "developer" | "property_manager";
 
@@ -66,7 +69,7 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+function RealAuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
@@ -166,7 +169,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export function useAuth() {
+function useRealAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error("useAuth must be used within AuthProvider");
   return ctx;
@@ -180,8 +183,8 @@ export function dashboardPathForRole(role: Role) {
   return "/dashboard/buyer";
 }
 
-export function ProtectedRoute({ allow, children }: { allow?: Role[]; children: ReactNode }) {
-  const { user, loading } = useAuth();
+function RealProtectedRoute({ allow, children }: { allow?: Role[]; children: ReactNode }) {
+  const { user, loading } = useRealAuth();
   const location = useLocation();
 
   if (loading) {
@@ -198,3 +201,11 @@ export function ProtectedRoute({ allow, children }: { allow?: Role[]; children: 
 
   return <>{children}</>;
 }
+
+// In demo mode (VITE_DEMO_MODE=true) there is no backend/session cookie to
+// talk to — demoAuth (src/lib/demo/demo-auth.tsx) is a localStorage-backed
+// replacement implementing this same AuthProvider/useAuth/ProtectedRoute
+// shape, used for the static Vercel demo build.
+export const AuthProvider: typeof RealAuthProvider = DEMO_MODE ? (demoAuth.AuthProvider as any) : RealAuthProvider;
+export const useAuth: typeof useRealAuth = DEMO_MODE ? (demoAuth.useAuth as any) : useRealAuth;
+export const ProtectedRoute: typeof RealProtectedRoute = DEMO_MODE ? (demoAuth.ProtectedRoute as any) : RealProtectedRoute;

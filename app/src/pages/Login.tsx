@@ -4,6 +4,9 @@ import { Eye, EyeOff, Lock, Mail, ShieldCheck, Sparkles } from "lucide-react";
 import { useAuth, dashboardPathForRole } from "../lib/auth-api";
 import { apiClient } from "../lib/api-client";
 import SEO from "../components/SEO";
+import { DEMO_CREDENTIALS } from "../lib/demo/demo-data";
+
+const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === "true";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -380,7 +383,9 @@ export default function Login() {
         </form>
 
         <p className="text-center text-xs text-subtle">
-          Demo accounts — buyer@estatein.com · agent@estatein.com · admin@estatein.com (password: Password1)
+          {DEMO_MODE
+            ? `Demo accounts — ${DEMO_CREDENTIALS.buyer.email} · ${DEMO_CREDENTIALS.agent.email} · ${DEMO_CREDENTIALS.admin.email} (password: ${DEMO_CREDENTIALS.buyer.password})`
+            : "Demo accounts — buyer@estatein.com · agent@estatein.com · admin@estatein.com (password: Password1)"}
         </p>
       </div>
     </div>

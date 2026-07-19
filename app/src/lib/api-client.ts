@@ -1,3 +1,5 @@
+import { demoApiClient } from "./demo/demo-api-client";
+
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 interface ApiResponse<T> {
@@ -24,6 +26,8 @@ export interface Requires2FAResponse {
   requires2FA: true;
   userId: string;
 }
+
+const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === "true";
 
 class ApiClient {
   // Access/refresh tokens live in httpOnly cookies set by the backend — the
@@ -663,4 +667,8 @@ class ApiClient {
   }
 }
 
-export const apiClient = new ApiClient();
+// In demo mode (VITE_DEMO_MODE=true) there is no backend to talk to at all —
+// demoApiClient (src/lib/demo/demo-api-client.ts) is a localStorage-backed
+// mock implementing this same method surface, used for the static Vercel
+// demo build.
+export const apiClient: ApiClient = DEMO_MODE ? (demoApiClient as unknown as ApiClient) : new ApiClient();

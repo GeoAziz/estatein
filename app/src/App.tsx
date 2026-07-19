@@ -50,6 +50,7 @@ import ManageListings from "./pages/agent/ManageListings";
 import AgentInbox from "./pages/agent/AgentInbox";
 import SiteSEO from "./components/SiteSEO";
 import Analytics from "./components/Analytics";
+import DemoBanner from "./components/DemoBanner";
 
 export default function App() {
   return (
@@ -60,6 +61,7 @@ export default function App() {
       <SiteSEO />
       <Analytics />
       <BrowserRouter>
+        <DemoBanner />
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />

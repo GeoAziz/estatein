@@ -8,6 +8,11 @@ build/
 .env.*.local
 .env.production
 !.env.example
+# Demo branch: a public, non-secret build flag (VITE_DEMO_MODE=true) so the
+# static demo build works out of the box on Vercel without manual env config.
+# Scoped to production/development modes only — NOT a bare .env — so it
+# doesn't leak into vitest's "test" mode and break the real-backend unit tests.
+!app/.env.production
 *.log
 .DS_Store
 .vscode/*
